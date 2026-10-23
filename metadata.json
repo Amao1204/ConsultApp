@@ -1,0 +1,6 @@
+{
+  "name": "ConsultAPP — Expertise & Solution Marketplace",
+  "description": "Whatever you're figuring out, talk to someone who knows. Connect with verified Nigerian and African experts across business, branding, career, fashion, events, and strategy.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
