@@ -1,0 +1,1480 @@
+# CONSULTAPP — COMPLETE WEBSITE VISUAL REDESIGN & UI/UX REFINEMENT
+
+## 1. PROJECT OBJECTIVE
+
+Redesign the existing ConsultAPP public-facing website into a polished, distinctive, modern and production-quality digital experience.
+
+This is a **visual redesign and UX refinement of the existing project**, not a new project.
+
+Inspect the existing codebase, current pages, routing, components, design tokens, responsive layouts, interactions and available assets before making any changes.
+
+Understand how the current website works before modifying its appearance.
+
+Your task is to significantly improve the visual quality, brand identity, information hierarchy, component consistency, typography, imagery, interaction design and animation system across all existing public-facing pages.
+
+The current interface does not meet the intended visual quality. Do not merely change the primary colour and leave the existing layout, generic cards, weak typography, repetitive sections or uninspired visual composition untouched.
+
+Approach this as an experienced senior product designer and frontend engineer conducting a comprehensive design refresh.
+
+### The desired outcome
+
+ConsultAPP should feel like a real, thoughtfully designed expertise marketplace with a clear brand identity, excellent usability, polished interactions and a consistent visual language.
+
+The interface should be:
+
+- Modern and structured
+- Bold without being visually noisy
+- Premium without feeling inaccessible
+- Human without looking casual or childish
+- Professional without feeling corporate and sterile
+- Minimal without looking empty or unfinished
+- Interactive without excessive animation
+- Distinctive without sacrificing usability
+
+The result must look intentional and cohesive rather than like a generic AI-generated SaaS template.
+
+---
+
+## 2. CRITICAL SCOPE BOUNDARY
+
+Redesign the **existing public-facing ConsultAPP website only**.
+
+Preserve the current project structure and all existing routes wherever possible.
+
+Include the public marketing, discovery, informational and authentication pages that already exist in the project.
+
+Expected public pages include:
+
+- Home
+- How It Works
+- Features
+- Explore Consultants
+- Public Consultant Profiles
+- Public Service Details, if present
+- Become a Consultant
+- For Businesses
+- Pricing
+- About
+- FAQ
+- Contact
+- Sign In
+- Sign Up
+- Forgot Password
+- Reset Password
+- Privacy Policy
+- Terms of Service
+- 404 Page
+
+If some of these pages do not currently exist, inspect the existing routing and determine whether they are already part of the agreed website scope before adding anything.
+
+Do not create duplicate routes or duplicate pages.
+
+### Explicitly out of scope
+
+Do not redesign, recreate or introduce:
+
+- Client dashboards
+- Consultant dashboards
+- Consultant earnings dashboards
+- Internal booking management
+- Internal consultant analytics
+- Internal messaging applications
+- Consultation rooms
+- Internal project management workspaces
+- Consultant calendar management dashboards
+- Administrative dashboards
+
+If the existing project contains these areas, do not modify their design or functionality as part of this task.
+
+Do not introduce new dashboard routes merely to demonstrate the visual direction.
+
+**The goal is to improve the existing public website while leaving the separate client and consultant application experiences for a future design phase.**
+
+---
+
+## 3. START WITH A CODEBASE AUDIT
+
+Before editing anything, inspect the existing application.
+
+Identify:
+
+1. Framework and build system.
+2. Existing route structure.
+3. Shared layout components.
+4. Current global styles and CSS variables.
+5. Existing component library.
+6. Typography and font loading.
+7. Current icon library.
+8. Image and asset directories.
+9. Existing animations and transition libraries.
+10. Form validation and submission logic.
+11. Authentication screen interactions.
+12. Search, filter and accordion interactions.
+13. Responsive breakpoints.
+14. Existing links and navigation behaviour.
+15. Any current implementation limitations.
+
+Create an internal implementation plan based on what you find.
+
+Preserve useful existing code. Reuse and refactor components where appropriate instead of rebuilding everything unnecessarily.
+
+Do not replace the project's framework, introduce a new component library or install a large animation library unless there is a clear technical reason.
+
+Do not delete existing functionality because it is inconvenient to restyle.
+
+Once the audit is complete, proceed with the redesign.
+
+Do not stop after producing an audit report or design proposal. Implement the actual changes.
+
+---
+
+## 4. NEW BRAND DIRECTION
+
+The selected visual direction is:
+
+**REFINED & BOLD**
+
+Colour identity:
+
+- Deep plum
+- Warm cream
+- Muted rose
+- Rich charcoal
+- Soft neutral surfaces
+
+Interface style:
+
+**Clean, structured product UI.**
+
+Animation intensity:
+
+**Balanced, with polished interactions and tasteful scroll reveals.**
+
+The design should combine the sophistication of an editorial brand with the precision and usability of a modern digital product.
+
+The plum palette should feel mature and confident, not overly feminine.
+
+Muted rose should be a supporting accent, not the dominant colour.
+
+Cream should provide warmth and breathing room.
+
+Charcoal should maintain readability and visual weight.
+
+Avoid making every section a different colour. The palette should work as one unified system across the website.
+
+---
+
+## 5. IMPLEMENT THE NEW COLOUR SYSTEM
+
+Create a centralised colour-token system using CSS custom properties or the existing equivalent.
+
+Use these exact starting values.
+
+### Primary brand: Deep Plum
+
+`#49283F`
+
+Use for:
+
+- Primary buttons
+- Brand emphasis
+- Important links
+- Selected navigation states
+- Key headings where appropriate
+- Important interactive elements
+
+This is the main brand anchor.
+
+### Secondary plum: Dark Plum
+
+`#321B2C`
+
+Use sparingly for:
+
+- Dark brand sections
+- Strong emphasis
+- High-contrast visual moments
+- Footer backgrounds where appropriate
+
+Do not use it as the background for every section.
+
+### Warm cream
+
+`#F8F4F0`
+
+Use for:
+
+- Main website backgrounds
+- Large open content sections
+- Authentication page backgrounds
+- Editorial surfaces
+
+Cream should soften the overall experience and prevent the site from feeling like a conventional white SaaS dashboard.
+
+### Muted rose
+
+`#D9B9C7`
+
+Use for:
+
+- Supporting accent surfaces
+- Selected category backgrounds
+- Small decorative details
+- Carefully chosen imagery treatments
+- Subtle visual emphasis
+
+Muted rose should not replace plum as the primary action colour.
+
+### Soft rose
+
+`#F1E5EA`
+
+Use for:
+
+- Light accent backgrounds
+- Informational cards
+- Selected filters
+- Supporting visual blocks
+
+### Main text
+
+`#282329`
+
+Use for:
+
+- Body text
+- Navigation labels
+- Standard headings
+- Form labels
+
+### Secondary text
+
+`#716873`
+
+Use for:
+
+- Supporting copy
+- Metadata
+- Descriptions
+- Secondary information
+
+Maintain sufficient contrast. If a muted text colour fails accessibility checks on a particular background, adjust the text colour rather than sacrificing readability.
+
+### Primary border
+
+`#E6DDE2`
+
+Use for:
+
+- Input borders
+- Card boundaries
+- Dividers
+- Navigation separators
+
+### White surface
+
+`#FFFFFF`
+
+Use selectively for:
+
+- Elevated cards
+- Inputs
+- Popovers
+- Dropdowns
+- Dialogs
+
+White should create clear surface separation against cream rather than dominate every section.
+
+### Success, warning and error colours
+
+Use accessible semantic colours for success, warning, error and informational states.
+
+Do not use muted rose as an error colour simply because it belongs to the brand palette.
+
+Do not communicate status through colour alone.
+
+### Colour proportions
+
+Use the following approximate distribution as a guide, not a rigid rule:
+
+- 55–65% warm cream and white surfaces
+- 20–25% dark text and plum
+- 8–12% neutral borders and supporting surfaces
+- 3–7% muted rose accents
+
+Adjust the proportions to suit individual pages.
+
+The goal is to maintain a calm foundation with deliberate moments of brand colour.
+
+### Colour restrictions
+
+Do not retain the previous blue-and-orange palette as the main visual identity.
+
+Remove old brand colours from buttons, badges, active states, gradients and decorative elements wherever they conflict with the new system.
+
+Do not replace every blue element with plum mechanically. Review each component's hierarchy and choose the appropriate token.
+
+Do not use random gradients, neon colours or additional accent colours.
+
+Do not create a purple gradient on every major section.
+
+The identity should rely on colour, typography, spacing, composition and imagery—not gradients alone.
+
+---
+
+## 6. TYPOGRAPHY REDESIGN
+
+Typography must contribute significantly to the new identity.
+
+Use **Inter** if it is already available and performs well, or select a refined, readable sans-serif typeface that fits the existing technical setup.
+
+A suitable alternative is Manrope for a slightly more distinctive product feel.
+
+Do not load several font families unnecessarily.
+
+Use a restrained typographic system with clear hierarchy.
+
+### Display headings
+
+Use large, confident headlines with carefully controlled line lengths.
+
+Desktop hero:
+
+Approximately 56–68px where the layout permits.
+
+Tablet hero:
+
+Approximately 44–52px.
+
+Mobile hero:
+
+Approximately 34–42px.
+
+Use a sensible line height, approximately 1.05–1.15 for large display headings.
+
+### Section headings
+
+Approximately 32–44px on desktop, scaling down responsively.
+
+### Card headings
+
+Approximately 18–22px.
+
+### Body copy
+
+Approximately 15–18px, with a comfortable line height.
+
+### Metadata and labels
+
+Approximately 12–14px where appropriate.
+
+### Typography rules
+
+- Use font weight to establish hierarchy.
+- Avoid bolding entire paragraphs.
+- Avoid excessively tight body text.
+- Prevent headings from wrapping awkwardly.
+- Use readable line lengths.
+- Avoid unnecessarily oversized headings in every section.
+- Do not use all-uppercase text for ordinary content.
+- Use uppercase micro-labels only where they contribute to the visual hierarchy.
+- Maintain consistent heading styles across pages.
+
+The result should feel editorially confident but remain practical for a real product.
+
+---
+
+## 7. REDESIGN THE VISUAL HIERARCHY
+
+Do not treat the existing interface as a finished design with the wrong colours.
+
+Review every page and ask:
+
+- What is the main purpose of this page?
+- What should the visitor notice first?
+- Is the primary CTA obvious?
+- Is the supporting information easy to scan?
+- Are there too many competing visual elements?
+- Are the sections too repetitive?
+- Does the page have enough visual breathing room?
+- Does the layout support the content?
+- Does the design feel specific to ConsultAPP?
+
+Improve weak layouts where necessary.
+
+### Remove visual repetition
+
+Avoid giving every section the same structure:
+
+Heading → paragraph → three identical cards.
+
+Use a more varied composition where it improves the experience.
+
+Possible layouts include:
+
+- Split editorial sections
+- Asymmetric content and image layouts
+- Horizontal feature arrangements
+- Structured grids
+- Full-width testimonial moments
+- Alternating image and text sections
+- Compact category collections
+- Clear process timelines
+- Distinct CTA sections
+
+Use variety intentionally.
+
+Do not add decorative elements simply to fill empty space.
+
+### Whitespace
+
+Use generous, consistent spacing.
+
+Do not cram sections together.
+
+Do not make the page excessively long through unnecessary padding.
+
+Establish a coherent spacing system and use it consistently.
+
+### Content width
+
+Use a consistent maximum content width, generally around 1160–1240px depending on the existing layout.
+
+Use responsive horizontal padding.
+
+Prevent long text blocks from stretching across the entire viewport.
+
+---
+
+## 8. REDESIGN THE HOMEPAGE HERO
+
+The homepage hero is a priority.
+
+It should immediately communicate what ConsultAPP does and make the next step obvious.
+
+Preserve the existing product positioning:
+
+**Whatever you're figuring out, talk to someone who knows.**
+
+Supporting copy:
+
+**Find trusted experts who can help you make better decisions, solve problems and turn ideas into action.**
+
+Primary CTA:
+
+**Find an Expert**
+
+Secondary CTA:
+
+**Become a Consultant**
+
+### Hero composition
+
+Create a strong, structured layout with clear separation between the headline, supporting copy, search and visual elements.
+
+Use a split layout or another composition that fits the existing content and viewport.
+
+Avoid making the hero a generic centred headline followed by a row of pills and floating cards.
+
+Use the deep plum for meaningful emphasis.
+
+The headline should be the strongest element.
+
+Keep supporting copy readable and concise.
+
+Buttons should be clearly differentiated.
+
+### Search component
+
+Make the problem-first search field a prominent and well-designed interface component.
+
+Label:
+
+**What do you need help with?**
+
+Placeholder:
+
+**Tell us what you're trying to figure out...**
+
+Examples may include:
+
+- How do I launch my fashion brand?
+- I need help planning an event.
+- How can I grow my business?
+- Help me improve my CV.
+
+Improve:
+
+- Input height
+- Border treatment
+- Focus state
+- Search icon positioning
+- Internal spacing
+- Suggestion dropdown
+- Mobile usability
+- Keyboard interaction
+
+Use cream, white and subtle rose surfaces where appropriate.
+
+The search component should feel integrated into the product identity rather than like a generic search bar.
+
+Preserve any existing working search logic.
+
+If search currently uses demo data, retain and improve it rather than replacing it with a nonfunctional visual.
+
+### Hero imagery
+
+Use realistic professional photography if suitable assets already exist.
+
+If the existing imagery is low quality or inconsistent, replace it with cohesive, high-quality images of contemporary professionals.
+
+Prioritise natural, credible Nigerian and African professional contexts where appropriate.
+
+Avoid overly staged corporate stock imagery.
+
+Avoid cartoon illustrations, synthetic-looking 3D people and decorative avatars.
+
+Use an image composition that feels intentional.
+
+Do not add floating UI cards unless they contribute to the story and fit the layout.
+
+If floating elements are retained, use no more than a few, and ensure they look like believable product components.
+
+---
+
+## 9. REDESIGN THE NAVIGATION
+
+Create a cleaner, more refined navigation system.
+
+Preserve the existing destinations and working links.
+
+Improve:
+
+- Logo placement
+- Link spacing
+- Typography
+- CTA hierarchy
+- Active page indicators
+- Hover states
+- Focus states
+- Mobile navigation
+- Sticky behaviour
+
+Use the new plum colour for the primary action.
+
+Avoid making every navigation link a pill or button.
+
+The primary CTA should be visually stronger than secondary links.
+
+### Sticky navigation
+
+If the current navbar is sticky, refine its existing behaviour.
+
+If it is not sticky, introduce sticky behaviour only if it benefits the current layout.
+
+When scrolling, use a restrained transition to a cream or white surface with a subtle border or shadow.
+
+Do not create a heavy floating navigation panel.
+
+Avoid excessive blur and glassmorphism.
+
+### Mobile menu
+
+The mobile menu must:
+
+- Open and close reliably.
+- Display all appropriate public navigation links.
+- Provide an obvious close action.
+- Support keyboard navigation.
+- Close appropriately after navigation.
+- Prevent accidental background interaction when implemented as an overlay.
+- Respect reduced-motion preferences.
+
+---
+
+## 10. REDESIGN BUTTONS AND CTAS
+
+Create a consistent button system.
+
+### Primary button
+
+Deep plum background.
+
+White text.
+
+Clear label.
+
+Comfortable height and padding.
+
+Subtle hover transition.
+
+### Secondary button
+
+Transparent or white background.
+
+Plum text.
+
+Thin, restrained border.
+
+### Tertiary action
+
+Text link or lightweight button.
+
+Use an appropriate arrow icon when helpful.
+
+### Button states
+
+Implement consistent:
+
+- Default
+- Hover
+- Focus-visible
+- Active
+- Disabled
+- Loading
+
+Buttons should have subtle interactions.
+
+On hover, the primary button may darken slightly, change elevation minimally or shift an arrow icon a few pixels.
+
+Do not use dramatic scaling, bouncing or flashing effects.
+
+Use consistent border radii throughout the product.
+
+Do not make every button excessively rounded.
+
+Do not use a different button style on every page.
+
+Preserve the existing button functionality and event handlers.
+
+---
+
+## 11. REDESIGN CARDS AND SURFACES
+
+Audit all cards across the public website.
+
+Standardise:
+
+- Backgrounds
+- Border colours
+- Border thickness
+- Corner radii
+- Padding
+- Heading styles
+- Metadata
+- Shadows
+- Interactive states
+
+Use subtle elevation only where it improves hierarchy.
+
+Avoid thick borders, heavy shadows and excessive rounding.
+
+Not every content block needs to be a card.
+
+Use open layouts for editorial content and cards for content that benefits from grouping or interaction.
+
+### Consultant cards
+
+Prioritise:
+
+- Photo quality
+- Name
+- Specialty
+- Verification indicator
+- Rating
+- Concise description
+- Price
+- Primary action
+
+Improve information density and scanability.
+
+Do not let badges, ratings, decorative icons and secondary text compete with the consultant's identity.
+
+### Category cards
+
+Use the muted rose and neutral palette selectively.
+
+Make the category name and problem statement easy to scan.
+
+Avoid giving every category a different background colour.
+
+### Feature cards
+
+Use varied but consistent compositions where appropriate.
+
+Do not create a large collection of identical cards with oversized icons and generic descriptions.
+
+Preserve the underlying content and functionality.
+
+---
+
+## 12. REDESIGN THE HOW IT WORKS PAGE
+
+Make the page feel like a coherent explanation of the product, not a collection of repetitive marketing blocks.
+
+Preserve the existing journey:
+
+1. Tell us what you need.
+2. Find your expert.
+3. Choose a service.
+4. Book a session.
+5. Get your solution.
+6. Get it done.
+
+Use a structured process layout.
+
+Possible approaches:
+
+- Numbered editorial timeline
+- Horizontal process on desktop
+- Vertical sequence on mobile
+- Alternating text and visual panels
+
+Use plum for the important stages and muted rose for supporting visual emphasis.
+
+Avoid excessive decorative circles, arrows and connecting lines.
+
+The visual hierarchy should make the sequence understandable at a glance.
+
+Include the distinction between consultation and execution support where the current page supports it.
+
+---
+
+## 13. REDESIGN THE FEATURES PAGE
+
+Organise features into clear, scannable groups.
+
+Preserve the existing product capabilities, such as:
+
+- Expert discovery
+- Search
+- Consultant profiles
+- Transparent pricing
+- Availability
+- Booking
+- Messaging
+- Payments
+- Reviews
+- Execution support
+
+Use a structured product UI treatment.
+
+Where appropriate, use realistic interface previews or existing product screenshots.
+
+Do not invent screenshots of non-existent dashboards.
+
+Do not imply that unfinished capabilities are fully implemented.
+
+Avoid filling the page with decorative icons.
+
+Use meaningful visual groupings and clear headings.
+
+Each feature should explain a user benefit, not simply name a technical capability.
+
+---
+
+## 14. REDESIGN EXPLORE CONSULTANTS
+
+Maintain the public discovery experience.
+
+Do not introduce authenticated dashboard elements.
+
+Improve:
+
+- Page heading
+- Search area
+- Category navigation
+- Filter controls
+- Sorting controls
+- Result count
+- Consultant grid
+- Empty states
+- Mobile filter interaction
+
+Use clear visual separation between discovery controls and consultant results.
+
+Use a structured grid that adapts to the viewport.
+
+On desktop, use the existing column layout if it works well; otherwise, refine it to fit the content.
+
+On mobile, ensure cards remain readable and useful.
+
+If filters open a popover or bottom sheet, make the interaction smooth and accessible.
+
+Preserve existing filter logic, sorting and search behaviour.
+
+Do not create controls that look interactive but do nothing.
+
+---
+
+## 15. REDESIGN PUBLIC CONSULTANT PROFILES
+
+Keep these as public-facing pages.
+
+Do not redesign consultant account dashboards.
+
+Improve:
+
+- Profile header
+- Portrait treatment
+- Name and expertise hierarchy
+- Verification indicator
+- Rating presentation
+- About section
+- Services
+- Experience
+- Portfolio
+- Reviews
+- Availability
+- Booking CTA
+
+Make it easy for visitors to understand who the consultant is, what they can help with, and what the next step should be.
+
+Use a structured layout with clear section spacing.
+
+Avoid excessive badges and unnecessary profile statistics.
+
+Keep the primary CTA prominent without making it visually aggressive.
+
+Preserve the existing profile data and navigation.
+
+---
+
+## 16. REDESIGN AUTHENTICATION PAGES
+
+Redesign Sign In, Sign Up, Forgot Password and Reset Password using the new visual identity.
+
+These screens should feel like part of the same product while remaining focused on the task.
+
+### Visual treatment
+
+- Warm cream page background.
+- Clean white or cream form surface.
+- Deep plum primary action.
+- Muted rose supporting accents.
+- Charcoal text.
+- Subtle borders.
+- Clear form hierarchy.
+
+Avoid generic, oversized gradient backgrounds.
+
+Avoid excessive decorative graphics.
+
+Use a split-screen layout on desktop only if it improves the existing page.
+
+If a split-screen composition is used, the visual panel should support the brand and not compete with the form.
+
+On mobile, prioritise a single-column form.
+
+### Form details
+
+Preserve:
+
+- Input validation
+- Password visibility toggles
+- Remember-me functionality
+- Forgot-password navigation
+- Password confirmation
+- Existing authentication integration
+- Existing loading and error states
+
+Improve input labels, field spacing, error messages, focus indicators and submit-button feedback.
+
+Do not replace functioning authentication with a visual-only mockup.
+
+Do not create fake success states for operations that require a backend response.
+
+---
+
+## 17. REDESIGN ABOUT, PRICING, FAQ AND CONTACT
+
+### About
+
+Use a more editorial layout.
+
+Focus on the mission, values and problem ConsultAPP exists to solve.
+
+Avoid excessive decorative cards.
+
+### Pricing
+
+Make pricing information transparent and easy to compare.
+
+Clarify when displayed prices are illustrative examples rather than fixed platform charges.
+
+Use restrained plum emphasis.
+
+### FAQ
+
+Create clean, accessible accordion components.
+
+Use subtle open/close transitions.
+
+Ensure the state is clear and keyboard interaction works.
+
+### Contact
+
+Use a clean form with clear labels and helpful validation.
+
+Make success and error states visually consistent with the new design system.
+
+Preserve existing submission logic.
+
+### Legal pages
+
+Improve readability, typography, spacing and navigation without changing legal meaning.
+
+### 404 page
+
+Create a distinctive but restrained branded error page.
+
+Provide working routes back to the homepage and consultant discovery.
+
+Avoid oversized cartoon illustrations.
+
+---
+
+## 18. ANIMATION SYSTEM
+
+Implement a balanced motion system.
+
+The website should feel polished and responsive without distracting visitors.
+
+Use motion to communicate state changes, guide attention and improve perceived responsiveness.
+
+Do not animate every element.
+
+### A. Hero entrance
+
+Introduce the hero elements in a restrained sequence:
+
+1. Small eyebrow label, if present.
+2. Main headline.
+3. Supporting paragraph.
+4. Search component.
+5. CTA buttons.
+6. Supporting image or visual.
+
+Use subtle opacity and vertical movement.
+
+Recommended total entrance duration: approximately 600–900ms.
+
+Use short stagger delays.
+
+Avoid word-by-word animations that make reading difficult.
+
+Avoid animations that delay access to the search or CTA.
+
+### B. Scroll reveals
+
+Use subtle scroll-triggered reveals for appropriate content sections.
+
+Recommended movement:
+
+- Opacity from 0 to 1.
+- Vertical movement of approximately 12–20px.
+- Duration of approximately 350–550ms.
+- Small stagger between related cards.
+
+Do not animate entire pages from a hidden state.
+
+Do not hide essential content if JavaScript fails.
+
+Prefer an implementation that leaves content visible by default and progressively enhances motion when available.
+
+Avoid repeatedly triggering large animations whenever a visitor scrolls up and down.
+
+### C. Buttons
+
+Use transitions around 160–240ms.
+
+Possible effects:
+
+- Slight background darkening.
+- Subtle border change.
+- Small arrow movement.
+- Minimal elevation.
+
+Avoid bounce and elastic effects.
+
+### D. Consultant cards
+
+On hover:
+
+- Slight image zoom, approximately 1.02–1.04.
+- Subtle border or shadow transition.
+- Small movement of an arrow or CTA indicator.
+
+Keep the movement restrained.
+
+Do not make cards jump or dramatically scale.
+
+On touch devices, ensure important information does not depend on hover.
+
+### E. Navigation
+
+Use smooth but brief transitions for:
+
+- Mobile menu opening.
+- Dropdown menus.
+- Active states.
+- Sticky navigation appearance.
+
+Avoid animating the entire navbar on every scroll event.
+
+### F. Accordions and dropdowns
+
+Use smooth height or opacity transitions when supported by the existing implementation.
+
+Prevent content from clipping.
+
+Keep keyboard interaction functional.
+
+### G. Search
+
+When the search field receives focus:
+
+- Strengthen the border or focus ring.
+- Slightly elevate the search surface if appropriate.
+- Reveal suggestions smoothly.
+- Maintain the field's dimensions and position.
+
+Suggestions should be accessible to keyboard users.
+
+### H. Page transitions
+
+Only introduce page transitions if compatible with the existing routing architecture.
+
+Keep them subtle.
+
+Do not delay navigation unnecessarily.
+
+Avoid complex full-screen transitions or page wipes.
+
+### I. Performance
+
+Use transform and opacity for most animations.
+
+Avoid expensive effects that animate layout continuously.
+
+Do not introduce large JavaScript bundles for minor interactions.
+
+Avoid unnecessary animation on mobile.
+
+---
+
+## 19. ACCESSIBILITY AND REDUCED MOTION
+
+Accessibility must remain intact throughout the redesign.
+
+Respect the `prefers-reduced-motion` media query.
+
+When reduced motion is enabled:
+
+- Disable nonessential entrance animations.
+- Remove parallax.
+- Remove unnecessary transform effects.
+- Reduce or remove scroll reveals.
+- Keep essential state transitions understandable.
+- Preserve all interactive functionality.
+
+Ensure:
+
+- Keyboard navigation.
+- Visible focus states.
+- Accessible labels.
+- Semantic headings.
+- Sufficient contrast.
+- Accessible dialogs.
+- Accessible mobile menus.
+- Screen-reader-friendly controls.
+
+Do not make the user wait for an animation before interacting with the page.
+
+---
+
+## 20. ICONS AND DECORATIVE ELEMENTS
+
+Use the existing icon library where possible.
+
+Use one consistent icon family.
+
+Avoid mixing unrelated icon styles.
+
+Icons should be simple, purposeful and visually consistent.
+
+Do not place icons beside every heading merely to fill space.
+
+Do not use emojis as a replacement for professional interface icons.
+
+Avoid decorative blobs, excessive circles, random sparkles and unnecessary abstract graphics.
+
+Use visual accents sparingly.
+
+The design should feel refined through composition, spacing, typography and colour rather than decoration.
+
+---
+
+## 21. IMAGERY REFINEMENT
+
+Audit all existing images.
+
+Check for:
+
+- Inconsistent photography styles.
+- Poor image quality.
+- Incorrect crops.
+- Unnecessary illustrations.
+- Repetitive imagery.
+- Images that do not support the content.
+- Images that clash with the new palette.
+
+Use realistic professional imagery that feels contemporary and credible.
+
+Prioritise diverse African professionals where appropriate.
+
+Use consistent image aspect ratios within the same component type.
+
+Apply `object-fit` and responsive image sizing correctly.
+
+Use subtle corner radii consistent with the component system.
+
+Do not add artificial colour overlays to every image.
+
+Do not recolour people's skin or use aggressive brand filters.
+
+Optimise image loading and preserve layout space to avoid content shifting.
+
+Reuse existing suitable assets before sourcing replacements.
+
+---
+
+## 22. RESPONSIVE REFINEMENT
+
+Test and refine the website at these viewport widths:
+
+- 1440px
+- 1280px
+- 1024px
+- 768px
+- 390px
+- 360px
+- 320px
+
+Do not merely scale desktop layouts down.
+
+Reflow content intentionally.
+
+Check:
+
+- Hero headline wrapping.
+- Navigation overflow.
+- Search field usability.
+- Button wrapping.
+- Consultant card proportions.
+- Grid column changes.
+- Form widths.
+- Footer layout.
+- Image cropping.
+- Modal sizing.
+- Dropdown positioning.
+- Horizontal overflow.
+- Touch target sizes.
+- Mobile menu behaviour.
+
+On smaller screens, simplify complex compositions instead of compressing them.
+
+Maintain readable text and comfortable spacing.
+
+Do not hide important functionality on mobile just to simplify the layout.
+
+---
+
+## 23. COMPONENT AND TOKEN ARCHITECTURE
+
+Implement the new design system centrally.
+
+Prefer shared tokens and reusable components over scattered hardcoded styles.
+
+Create or refine shared styles for:
+
+- Brand colours
+- Typography
+- Spacing
+- Border radii
+- Borders
+- Shadows
+- Transitions
+- Breakpoints
+
+Standardise the following components:
+
+- Navbar
+- Footer
+- Buttons
+- Inputs
+- Search fields
+- Consultant cards
+- Category cards
+- Feature cards
+- Testimonial cards
+- Badges
+- Tabs
+- Accordions
+- Dropdowns
+- Dialogs
+- Toasts
+- Form errors
+- Loading indicators
+- Empty states
+
+Avoid creating several visually different versions of the same component without a clear reason.
+
+Keep component variants intentional and documented in the code where appropriate.
+
+---
+
+## 24. FUNCTIONALITY PRESERVATION
+
+This is a visual redesign, not permission to break existing behaviour.
+
+Preserve all working:
+
+- Routes
+- Internal links
+- Search interactions
+- Category navigation
+- Filters
+- Sorting
+- Forms
+- Validation
+- Authentication
+- Password visibility controls
+- Accordions
+- Mobile navigation
+- Modal interactions
+- Contact submissions
+- Existing API integrations
+- Existing data bindings
+- Error handling
+- Loading states
+
+Do not replace working integrations with mock interactions.
+
+Do not remove features because they are difficult to style.
+
+Do not create buttons that do nothing.
+
+If an existing action cannot work because a backend integration is missing, preserve the existing behaviour and present an honest, understandable state rather than pretending the action succeeded.
+
+Do not introduce new dependencies unless they are necessary and compatible with the current application.
+
+Do not modify the client or consultant dashboards.
+
+---
+
+## 25. CONTENT PRESERVATION
+
+Preserve the established ConsultAPP positioning and core product information.
+
+Primary headline:
+
+**Whatever you're figuring out, talk to someone who knows.**
+
+Core promise:
+
+**Find the right expert. Get the right guidance. Get things done.**
+
+Keep the product centred on:
+
+- Finding relevant expertise.
+- Understanding a consultant's experience.
+- Comparing services and pricing.
+- Booking consultations.
+- Receiving actionable guidance.
+- Hiring consultants for execution where applicable.
+
+Retain existing meaningful content, testimonials, consultant information, prices and page copy unless a wording change is necessary to fix a clear inconsistency or usability problem.
+
+Do not replace specific content with generic marketing copy.
+
+Do not fabricate testimonials, verification claims, customer counts or performance statistics.
+
+If the existing project uses explicitly identified demo data, retain the demo status.
+
+Use Nigerian Naira wherever the existing product requires pricing in NGN.
+
+Do not silently introduce new product capabilities as though they already exist.
+
+---
+
+## 26. PERFORMANCE AND IMPLEMENTATION QUALITY
+
+Keep the redesign technically lightweight.
+
+Use the project's existing framework and styling approach.
+
+Avoid unnecessary dependencies.
+
+Optimise images.
+
+Avoid layout shifts.
+
+Keep animations efficient.
+
+Use semantic HTML.
+
+Avoid duplicated CSS rules.
+
+Remove obsolete styles only after verifying that they are no longer used.
+
+Ensure that the final build can run using the existing project commands.
+
+Do not rewrite configuration files unnecessarily.
+
+Do not expose API keys, credentials or environment variables.
+
+---
+
+## 27. IMPLEMENTATION ORDER
+
+Work through the redesign in the following order.
+
+### Phase 1 — Foundation
+
+1. Audit the existing codebase.
+2. Define the new colour tokens.
+3. Establish typography.
+4. Standardise spacing and radii.
+5. Refine shared buttons and inputs.
+6. Update shared layout components.
+
+### Phase 2 — Core public experience
+
+1. Home
+2. Global navigation
+3. Footer
+4. How It Works
+5. Features
+6. Explore Consultants
+7. Public Consultant Profiles
+
+### Phase 3 — Conversion pages
+
+1. Become a Consultant
+2. For Businesses
+3. Pricing
+4. About
+5. FAQ
+6. Contact
+
+### Phase 4 — Authentication and supporting pages
+
+1. Sign In
+2. Sign Up
+3. Forgot Password
+4. Reset Password
+5. Legal pages
+6. 404 Page
+
+### Phase 5 — Motion and quality assurance
+
+1. Add the shared motion system.
+2. Refine hover and focus states.
+3. Add appropriate scroll reveals.
+4. Verify reduced-motion behaviour.
+5. Test mobile navigation.
+6. Check responsive layouts.
+7. Verify routes and interactions.
+8. Run the available build and tests.
+
+Adapt the order to the existing project structure where necessary, but preserve the overall priorities.
+
+---
+
+## 28. QUALITY ASSURANCE CHECKLIST
+
+Before finishing, verify the following.
+
+### Visual quality
+
+- [ ] Old blue-and-orange branding has been replaced where appropriate.
+- [ ] Plum, cream and muted rose are used consistently.
+- [ ] The homepage has a clear and distinctive hero.
+- [ ] Typography has a consistent hierarchy.
+- [ ] Cards are not excessively repetitive.
+- [ ] Buttons are visually consistent.
+- [ ] Images are cohesive and correctly cropped.
+- [ ] Sections have deliberate spacing.
+- [ ] The design feels like one product across all public pages.
+- [ ] The interface does not look like a generic template.
+
+### Motion
+
+- [ ] Animations are restrained and consistent.
+- [ ] Scroll reveals do not hide essential content.
+- [ ] Hover effects are subtle.
+- [ ] Menus and accordions work.
+- [ ] No unnecessary continuous animations exist.
+- [ ] Reduced-motion preferences are respected.
+
+### Functionality
+
+- [ ] Existing public routes still work.
+- [ ] Internal links resolve correctly.
+- [ ] Forms still validate.
+- [ ] Authentication integrations remain intact.
+- [ ] Search and filters still work.
+- [ ] Mobile navigation works.
+- [ ] Buttons have meaningful actions.
+- [ ] Loading, error and success states remain correct.
+- [ ] No console errors have been introduced where testable.
+
+### Responsive design
+
+- [ ] No horizontal overflow at 320px.
+- [ ] The homepage hero adapts appropriately.
+- [ ] Navigation works at mobile widths.
+- [ ] Consultant cards remain readable.
+- [ ] Authentication forms fit small screens.
+- [ ] Footer columns reflow correctly.
+- [ ] Touch interactions remain usable.
+
+### Scope
+
+- [ ] No new client dashboard has been created.
+- [ ] No new consultant dashboard has been created.
+- [ ] Existing dashboard routes, if any, have not been redesigned.
+- [ ] The changes are limited to the public website and its shared public-facing components.
+
+Fix issues discovered during testing before considering the work complete.
+
+---
+
+## 29. FINAL INSTRUCTION
+
+Redesign the existing ConsultAPP website in place.
+
+Do not stop at recommendations, a plan or a screenshot. Implement the changes in the actual codebase.
+
+Do not generate an unrelated new website.
+
+Do not rebuild the client or consultant dashboards.
+
+Do not sacrifice existing functionality for visual polish.
+
+The final website should combine:
+
+**The sophistication of deep plum and muted rose.**
+
+**The warmth of cream surfaces.**
+
+**The clarity of a structured product interface.**
+
+**The confidence of bold, disciplined typography.**
+
+**The polish of balanced motion and thoughtful interactions.**
+
+The most important outcome is a cohesive, distinctive and usable ConsultAPP website that feels professionally designed, works across devices and is ready for further product development.
+
+Inspect, implement, test and refine until the public website meets this quality bar.

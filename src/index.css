@@ -1,27 +1,120 @@
 @import "tailwindcss";
 
+@theme {
+  --color-plum: #49283F;
+  --color-plum-dark: #321B2C;
+  --color-plum-hover: #3E2135;
+  --color-plum-subtle: #5E3451;
+  --color-cream: #F8F4F0;
+  --color-cream-subtle: #F3ECE6;
+  --color-cream-card: #FAF7F4;
+  --color-rose-muted: #D9B9C7;
+  --color-rose-soft: #F1E5EA;
+  --color-rose-light: #F8F1F4;
+  --color-charcoal: #282329;
+  --color-secondary: #716873;
+  --color-border-subtle: #E6DDE2;
+  --color-border-light: #EFE8EC;
+  
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+:root {
+  --bg-cream: #F8F4F0;
+  --plum-primary: #49283F;
+  --plum-dark: #321B2C;
+  --rose-muted: #D9B9C7;
+  --rose-soft: #F1E5EA;
+  --text-main: #282329;
+  --text-secondary: #716873;
+  --border-color: #E6DDE2;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: #FCFCFA;
-    color: #17202A;
+    background-color: #F8F4F0;
+    color: #282329;
+  }
+
+  body {
+    background-color: #F8F4F0;
+    color: #282329;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #49283F;
+    color: #FFFFFF;
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar matching Refined Plum palette */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #F8F4F0;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #D9B9C7;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #49283F;
 }
 
+/* Accessible focus ring utility */
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid #49283F;
+  outline-offset: 2px;
+}
+
+/* Motion system & reduced motion compliance */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

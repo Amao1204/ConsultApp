@@ -10,12 +10,12 @@ import {
   MessageSquare,
   Shield,
   Briefcase,
-  Award,
   ChevronLeft,
   ArrowRight,
   ExternalLink,
   CheckCircle2,
-  HelpCircle,
+  Lock,
+  Sparkles,
 } from 'lucide-react';
 
 interface ConsultantProfilePageProps {
@@ -52,12 +52,12 @@ export const ConsultantProfilePage: React.FC<ConsultantProfilePageProps> = ({
   };
 
   return (
-    <div id="consultant-public-profile" className="min-h-screen pt-24 pb-20 bg-[#FCFCFA]">
-      {/* Breadcrumb & Navigation */}
+    <div id="consultant-public-profile" className="min-h-screen pt-24 pb-20 bg-[#F8F4F0] text-[#282329]">
+      {/* Back Link */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
         <button
           onClick={() => onNavigate('explore')}
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-[#64748B] hover:text-[#2563EB] transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#49283F] hover:text-[#321B2C] transition-colors cursor-pointer"
         >
           <ChevronLeft className="w-4 h-4" />
           <span>Back to all consultants</span>
@@ -69,11 +69,11 @@ export const ConsultantProfilePage: React.FC<ConsultantProfilePageProps> = ({
           {/* Main Column (2 spans) */}
           <div className="lg:col-span-2 space-y-8">
             {/* Profile Header Card */}
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E5E7EB] shadow-xs">
+            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E6DDE2] shadow-xs">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
                 {/* Avatar */}
-                <div className="relative">
-                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-white shadow-md bg-slate-100">
+                <div className="relative shrink-0">
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border border-[#E6DDE2] shadow-xs bg-[#FAF7F4]">
                     <img
                       src={consultant.avatarUrl}
                       alt={consultant.name}
@@ -82,10 +82,10 @@ export const ConsultantProfilePage: React.FC<ConsultantProfilePageProps> = ({
                   </div>
                   {consultant.verified && (
                     <div
-                      className="absolute -bottom-2 -right-2 bg-white rounded-full p-1 shadow-xs"
-                      title="Verified Identity and Background"
+                      className="absolute -bottom-1 -right-1 bg-white rounded-full p-1 shadow-2xs"
+                      title="Verified Identity & Track Record"
                     >
-                      <CheckCircle className="w-6 h-6 text-[#2563EB] fill-[#EFF6FF]" />
+                      <CheckCircle className="w-5 h-5 text-[#49283F] fill-[#F1E5EA]" />
                     </div>
                   )}
                 </div>
@@ -93,83 +93,95 @@ export const ConsultantProfilePage: React.FC<ConsultantProfilePageProps> = ({
                 {/* Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h1 className="text-2xl sm:text-3xl font-bold text-[#17202A] tracking-tight">
+                    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#282329] tracking-tight">
                       {consultant.name}
                     </h1>
                     {consultant.badgeText && (
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]">
+                      <span className="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-[#F1E5EA] text-[#49283F]">
                         {consultant.badgeText}
                       </span>
                     )}
                   </div>
 
-                  <p className="text-sm sm:text-base font-semibold text-[#2563EB] mt-1">
+                  <p className="text-sm font-semibold text-[#49283F] mt-1">
                     {consultant.title}
                   </p>
 
-                  <div className="flex items-center gap-3 sm:gap-4 mt-3 flex-wrap text-xs sm:text-sm text-[#64748B]">
-                    <div className="flex items-center text-[#F59E0B] font-semibold">
-                      <Star className="w-4 h-4 fill-[#F59E0B] mr-1" />
+                  <div className="flex items-center gap-2 mt-2 text-xs text-[#716873] flex-wrap">
+                    <div className="flex items-center text-[#282329] font-bold">
+                      <Star className="w-3.5 h-3.5 fill-[#D97706] text-[#D97706] mr-1" />
                       <span>{consultant.rating.toFixed(1)}</span>
-                      <span className="text-[#64748B] font-normal ml-1">
-                        ({consultant.reviewCount} client reviews)
-                      </span>
                     </div>
-                    <span>•</span>
+                    <span aria-hidden="true">·</span>
+                    <span>{consultant.reviewCount} client reviews</span>
+                    <span aria-hidden="true">·</span>
                     <div className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-[#94A3B8]" />
-                      <span>Responds {consultant.responseTime}</span>
-                    </div>
-                    <span>•</span>
-                    <div className="flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-[#94A3B8]" />
+                      <MapPin className="w-3 h-3 text-[#716873]" />
                       <span>{consultant.location}</span>
                     </div>
+                    <span aria-hidden="true">·</span>
+                    <span>{consultant.experienceYears}+ years experience</span>
+                  </div>
+
+                  {/* Specialties */}
+                  <div className="flex flex-wrap gap-1.5 mt-4">
+                    {consultant.specialties.map((spec, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-1 rounded-md text-xs font-medium bg-[#F1E5EA]/70 text-[#49283F]"
+                      >
+                        {spec}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              {/* Quick stats counter strip */}
-              <div className="grid grid-cols-3 gap-4 pt-6 mt-6 border-t border-[#F1F5F9] text-center">
-                <div>
-                  <span className="block text-lg sm:text-xl font-bold text-[#17202A]">
-                    {consultant.experienceYears}+ Yrs
+              {/* Quick Stat Bar */}
+              <div className="mt-8 pt-6 border-t border-[#E6DDE2] grid grid-cols-3 gap-4 text-center">
+                <div className="p-3 rounded-xl bg-[#FAF7F4] border border-[#E6DDE2]">
+                  <span className="block text-[11px] font-medium text-[#716873] uppercase tracking-wider">
+                    Consultations
                   </span>
-                  <span className="text-xs text-[#64748B]">Experience</span>
-                </div>
-                <div>
-                  <span className="block text-lg sm:text-xl font-bold text-[#17202A]">
+                  <span className="text-base sm:text-lg font-bold text-[#282329]">
                     {consultant.completedConsultations}+
                   </span>
-                  <span className="text-xs text-[#64748B]">Sessions Delivered</span>
                 </div>
-                <div>
-                  <span className="block text-lg sm:text-xl font-bold text-emerald-600">
-                    100%
+                <div className="p-3 rounded-xl bg-[#FAF7F4] border border-[#E6DDE2]">
+                  <span className="block text-[11px] font-medium text-[#716873] uppercase tracking-wider">
+                    Response Speed
                   </span>
-                  <span className="text-xs text-[#64748B]">Completion Rate</span>
+                  <span className="text-base sm:text-lg font-bold text-[#282329]">
+                    {consultant.responseTime}
+                  </span>
+                </div>
+                <div className="p-3 rounded-xl bg-[#FAF7F4] border border-[#E6DDE2]">
+                  <span className="block text-[11px] font-medium text-[#716873] uppercase tracking-wider">
+                    Next Available
+                  </span>
+                  <span className="text-base sm:text-lg font-bold text-[#166534]">
+                    {consultant.availableToday ? 'Today' : 'This Week'}
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Navigation Tabs */}
-            <div className="flex items-center space-x-2 border-b border-[#E5E7EB] pb-2 overflow-x-auto">
-              {(
-                [
-                  { id: 'about', label: 'About & Background' },
-                  { id: 'services', label: 'Services & Rates' },
-                  { id: 'reviews', label: `Reviews (${consultant.reviews.length})` },
-                  { id: 'portfolio', label: 'Case Studies' },
-                  { id: 'faq', label: 'FAQ' },
-                ] as const
-              ).map((tab) => (
+            {/* Profile Tab Navigation (Segmented button bar) */}
+            <div className="flex items-center gap-2 border-b border-[#E6DDE2] pb-2 overflow-x-auto scrollbar-none">
+              {[
+                { id: 'about', label: 'About & Philosophy' },
+                { id: 'services', label: `Services & Rates (${consultant.services.length})` },
+                { id: 'reviews', label: `Reviews (${consultant.reviews.length})` },
+                { id: 'portfolio', label: `Track Record (${consultant.portfolio.length})` },
+                { id: 'faq', label: 'Consultant FAQs' },
+              ].map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`px-4 py-2 text-sm font-medium rounded-xl transition-colors whitespace-nowrap cursor-pointer ${
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors shrink-0 cursor-pointer ${
                     activeTab === tab.id
-                      ? 'bg-[#172B4D] text-white shadow-xs'
-                      : 'text-[#64748B] hover:text-[#17202A] hover:bg-slate-100'
+                      ? 'bg-[#49283F] text-white shadow-2xs'
+                      : 'text-[#716873] hover:text-[#282329] hover:bg-white'
                   }`}
                 >
                   {tab.label}
@@ -177,43 +189,28 @@ export const ConsultantProfilePage: React.FC<ConsultantProfilePageProps> = ({
               ))}
             </div>
 
-            {/* Tab: About & Background */}
+            {/* Tab 1: About */}
             {activeTab === 'about' && (
               <div className="space-y-6">
-                <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#E5E7EB]">
-                  <h3 className="text-lg font-bold text-[#17202A] mb-3">About Me</h3>
-                  <p className="text-sm sm:text-base text-[#475569] leading-relaxed whitespace-pre-line">
+                <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E6DDE2] shadow-xs space-y-4">
+                  <h3 className="text-lg font-bold text-[#282329]">Background & Experience</h3>
+                  <p className="text-sm sm:text-base text-[#716873] leading-relaxed">
                     {consultant.fullAbout}
                   </p>
                 </div>
 
-                {/* Expertise Specialties */}
-                <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#E5E7EB]">
-                  <h3 className="text-lg font-bold text-[#17202A] mb-3">Core Expertise</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {consultant.specialties.map((spec, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]"
-                      >
-                        {spec}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* How I Work Section */}
-                <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#E5E7EB]">
-                  <h3 className="text-lg font-bold text-[#17202A] mb-4">How I Work with Clients</h3>
+                {/* How I Work */}
+                <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E6DDE2] shadow-xs space-y-5">
+                  <h3 className="text-lg font-bold text-[#282329]">How I Advise Clients</h3>
                   <div className="space-y-4">
                     {consultant.howIWork.map((step, idx) => (
-                      <div key={idx} className="flex items-start gap-4">
-                        <div className="w-8 h-8 rounded-xl bg-[#EFF6FF] text-[#2563EB] font-bold text-xs flex items-center justify-center shrink-0">
-                          {step.step}
+                      <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-[#FAF7F4] border border-[#E6DDE2]">
+                        <div className="w-8 h-8 rounded-lg bg-[#F1E5EA] text-[#49283F] font-bold text-xs flex items-center justify-center shrink-0">
+                          0{idx + 1}
                         </div>
                         <div>
-                          <h4 className="font-semibold text-sm text-[#17202A]">{step.title}</h4>
-                          <p className="text-xs sm:text-sm text-[#64748B] mt-0.5">
+                          <h4 className="font-bold text-sm text-[#282329]">{step.title}</h4>
+                          <p className="text-xs sm:text-sm text-[#716873] mt-1 leading-relaxed">
                             {step.description}
                           </p>
                         </div>
@@ -224,56 +221,54 @@ export const ConsultantProfilePage: React.FC<ConsultantProfilePageProps> = ({
               </div>
             )}
 
-            {/* Tab: Services & Rates */}
+            {/* Tab 2: Services & Pricing */}
             {activeTab === 'services' && (
               <div className="space-y-4">
-                {consultant.services.map((svc) => (
+                {consultant.services.map((service) => (
                   <div
-                    key={svc.id}
-                    className="bg-white rounded-2xl p-6 border border-[#E5E7EB] hover:border-[#2563EB]/40 shadow-xs transition-all space-y-4"
+                    key={service.id}
+                    className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E6DDE2] shadow-xs hover:border-[#D9B9C7] transition-all space-y-4"
                   >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div>
-                        <h4 className="text-lg font-bold text-[#17202A]">{svc.title}</h4>
-                        <div className="flex items-center gap-3 text-xs text-[#64748B] mt-1">
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-3.5 h-3.5 text-[#94A3B8]" />
-                            {svc.duration}
-                          </span>
-                          <span>•</span>
-                          <span>1-on-1 Interactive Video Session</span>
+                        <h3 className="text-xl font-bold text-[#282329]">{service.title}</h3>
+                        <div className="flex items-center gap-2 text-xs text-[#716873] mt-1">
+                          <Clock className="w-3.5 h-3.5 text-[#49283F]" />
+                          <span>Duration: {service.duration}</span>
                         </div>
                       </div>
                       <div className="text-left sm:text-right">
-                        <span className="text-2xl font-bold text-[#17202A]">
-                          ₦{svc.price.toLocaleString()}
-                        </span>
-                        <span className="text-xs text-[#64748B] block">per session</span>
+                        <div className="text-2xl font-bold text-[#282329]">
+                          ₦{service.price.toLocaleString()}
+                        </div>
+                        <span className="text-[11px] text-[#716873]">Naira Escrow Protected</span>
                       </div>
                     </div>
 
-                    <p className="text-sm text-[#475569]">{svc.description}</p>
+                    <p className="text-sm text-[#716873] leading-relaxed">
+                      {service.description}
+                    </p>
 
-                    <div className="bg-[#FCFCFA] p-4 rounded-xl border border-[#E5E7EB]">
-                      <h5 className="text-xs font-bold uppercase tracking-wider text-[#17202A] mb-2">
-                        What you get:
-                      </h5>
-                      <ul className="space-y-1.5 text-xs sm:text-sm text-[#475569]">
-                        {svc.deliverables.map((item, idx) => (
-                          <li key={idx} className="flex items-center gap-2">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <div className="pt-3 border-t border-[#E6DDE2] space-y-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#282329]">
+                        Deliverables Included:
+                      </span>
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#282329]">
+                        {service.deliverables.map((item, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#49283F] shrink-0 mt-0.5" />
                             <span>{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="flex justify-end pt-2">
+                    <div className="pt-2 flex justify-end">
                       <button
-                        onClick={() => handleBookService(svc)}
-                        className="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-xs transition-colors cursor-pointer"
+                        onClick={() => handleBookService(service)}
+                        className="px-6 py-2.5 rounded-xl font-semibold text-white bg-[#49283F] hover:bg-[#3E2135] shadow-xs transition-colors flex items-center gap-2 cursor-pointer text-sm"
                       >
-                        <span>Book This Service</span>
+                        <span>Reserve This Service</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
@@ -282,98 +277,82 @@ export const ConsultantProfilePage: React.FC<ConsultantProfilePageProps> = ({
               </div>
             )}
 
-            {/* Tab: Reviews */}
+            {/* Tab 3: Reviews */}
             {activeTab === 'reviews' && (
               <div className="space-y-4">
-                <div className="bg-white rounded-2xl p-6 border border-[#E5E7EB] flex items-center justify-between">
-                  <div>
-                    <h3 className="text-lg font-bold text-[#17202A]">Verified Client Feedback</h3>
-                    <p className="text-xs text-[#64748B]">
-                      Reviews can only be submitted following a completed consultation session.
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-1 bg-[#FFF7E6] text-[#F59E0B] px-3 py-1.5 rounded-xl font-bold text-base">
-                    <Star className="w-4 h-4 fill-[#F59E0B]" />
-                    <span>{consultant.rating.toFixed(1)}</span>
-                  </div>
-                </div>
-
                 {consultant.reviews.map((rev) => (
                   <div
                     key={rev.id}
-                    className="bg-white rounded-2xl p-6 border border-[#E5E7EB] space-y-3"
+                    className="bg-white rounded-3xl p-6 border border-[#E6DDE2] shadow-xs space-y-3"
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <h4 className="font-bold text-sm text-[#17202A]">{rev.clientName}</h4>
-                        <p className="text-xs text-[#64748B]">{rev.clientRole}</p>
+                        <h4 className="font-bold text-sm text-[#282329]">{rev.clientName}</h4>
+                        <span className="text-xs text-[#716873]">{rev.clientRole}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <div className="flex items-center text-[#F59E0B]">
-                          {Array.from({ length: 5 }).map((_, i) => (
+                        <div className="flex items-center text-[#D97706]">
+                          {[...Array(5)].map((_, i) => (
                             <Star
                               key={i}
                               className={`w-3.5 h-3.5 ${
                                 i < Math.floor(rev.rating)
-                                  ? 'fill-[#F59E0B]'
-                                  : 'text-slate-300'
+                                  ? 'fill-[#D97706] text-[#D97706]'
+                                  : 'text-slate-200'
                               }`}
                             />
                           ))}
                         </div>
-                        <span className="text-xs text-[#94A3B8]">{rev.date}</span>
+                        <span className="text-xs text-[#716873]">{rev.date}</span>
                       </div>
                     </div>
-
-                    <p className="text-sm text-[#475569] leading-relaxed italic">
+                    <p className="text-sm text-[#716873] leading-relaxed italic">
                       "{rev.comment}"
                     </p>
-
-                    <div className="text-[11px] text-[#64748B] bg-[#FCFCFA] px-2.5 py-1 rounded inline-block border border-[#E5E7EB]">
-                      Consultation: <strong className="text-[#17202A]">{rev.serviceBooked}</strong>
+                    <div className="text-[11px] font-medium text-[#49283F] bg-[#F1E5EA] px-2.5 py-1 rounded-md inline-block">
+                      Service: {rev.serviceBooked}
                     </div>
                   </div>
                 ))}
               </div>
             )}
 
-            {/* Tab: Portfolio & Case Studies */}
+            {/* Tab 4: Portfolio */}
             {activeTab === 'portfolio' && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {consultant.portfolio.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-white rounded-2xl p-6 border border-[#E5E7EB] space-y-3"
+                    className="bg-white rounded-3xl p-6 border border-[#E6DDE2] shadow-xs space-y-3 flex flex-col justify-between"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-semibold text-[#2563EB] bg-[#EFF6FF] px-2.5 py-0.5 rounded-full">
+                    <div>
+                      <span className="text-[11px] font-semibold text-[#49283F] uppercase tracking-wider">
                         {item.category}
                       </span>
-                      {item.metrics && (
-                        <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
-                          {item.metrics}
-                        </span>
-                      )}
+                      <h4 className="font-bold text-base text-[#282329] mt-1">{item.title}</h4>
+                      <p className="text-xs sm:text-sm text-[#716873] mt-2 leading-relaxed">
+                        {item.description}
+                      </p>
                     </div>
-                    <h4 className="font-bold text-base text-[#17202A]">{item.title}</h4>
-                    <p className="text-sm text-[#475569]">{item.description}</p>
+                    {item.metrics && (
+                      <div className="pt-3 border-t border-[#E6DDE2] text-xs font-semibold text-[#166534]">
+                        Outcome: {item.metrics}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             )}
 
-            {/* Tab: FAQ */}
+            {/* Tab 5: FAQ */}
             {activeTab === 'faq' && (
-              <div className="bg-white rounded-2xl p-6 border border-[#E5E7EB] space-y-4">
-                <h3 className="text-lg font-bold text-[#17202A]">Frequently Asked Questions</h3>
-                <div className="space-y-3">
-                  {consultant.faqs.map((faq, idx) => (
-                    <div key={idx} className="p-4 rounded-xl bg-[#FCFCFA] border border-[#E5E7EB]">
-                      <h4 className="font-semibold text-sm text-[#17202A] flex items-center gap-2">
-                        <HelpCircle className="w-4 h-4 text-[#2563EB]" />
-                        <span>{faq.question}</span>
-                      </h4>
-                      <p className="text-xs sm:text-sm text-[#64748B] mt-2 pl-6 leading-relaxed">
+              <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E6DDE2] shadow-xs space-y-4">
+                <h3 className="text-lg font-bold text-[#282329]">Frequently Asked Questions</h3>
+                <div className="space-y-4">
+                  {consultant.faqs.map((faq, i) => (
+                    <div key={i} className="p-4 rounded-2xl bg-[#FAF7F4] border border-[#E6DDE2] space-y-1.5">
+                      <h4 className="font-bold text-sm text-[#282329]">{faq.question}</h4>
+                      <p className="text-xs sm:text-sm text-[#716873] leading-relaxed">
                         {faq.answer}
                       </p>
                     </div>
@@ -383,61 +362,53 @@ export const ConsultantProfilePage: React.FC<ConsultantProfilePageProps> = ({
             )}
           </div>
 
-          {/* Sticky Sidebar Booking Action Card (1 span) */}
+          {/* Right Column / Sticky Booking Card (1 span) */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24 bg-white rounded-3xl p-6 border border-[#E5E7EB] shadow-xs space-y-6">
+            <div className="sticky top-24 bg-white rounded-3xl p-6 border border-[#E6DDE2] shadow-md space-y-6">
               <div>
-                <span className="text-xs uppercase tracking-wider text-[#64748B] block">Starting from</span>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-3xl font-extrabold text-[#17202A]">
-                    ₦{consultant.startingPrice.toLocaleString()}
-                  </span>
-                  <span className="text-xs text-[#64748B]">/ consultation</span>
+                <span className="block text-xs font-bold uppercase tracking-wider text-[#716873]">
+                  Consultation Rates
+                </span>
+                <div className="text-3xl font-extrabold text-[#282329] mt-1">
+                  ₦{consultant.startingPrice.toLocaleString()}
+                  <span className="text-xs font-normal text-[#716873] ml-1.5">/ session</span>
                 </div>
+                <p className="text-xs text-[#716873] mt-1">
+                  Next slot: <strong>{consultant.nextAvailable}</strong>
+                </p>
               </div>
 
-              <div className="p-3.5 bg-[#EFF6FF] rounded-2xl border border-[#BFDBFE] flex items-center gap-3">
-                <Calendar className="w-5 h-5 text-[#2563EB] shrink-0" />
-                <div>
-                  <span className="text-xs font-bold text-[#172B4D] block">Next Available Slot</span>
-                  <span className="text-xs text-[#2563EB] font-medium">{consultant.nextAvailable}</span>
-                </div>
-              </div>
+              {/* Primary CTA */}
+              <button
+                id="profile-sticky-book-btn"
+                onClick={() => handleBookService()}
+                className="w-full py-3.5 px-4 rounded-xl font-bold text-white bg-[#49283F] hover:bg-[#3E2135] shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer focus-ring"
+              >
+                <span>Book 1-on-1 Consultation</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
 
-              {/* Main CTAs */}
-              <div className="space-y-2.5">
-                <button
-                  id="profile-book-btn"
-                  onClick={() => handleBookService()}
-                  className="w-full py-3 px-4 text-sm font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-xs transition-all active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
-                >
-                  <Calendar className="w-4 h-4" />
-                  <span>Book a Consultation</span>
-                </button>
+              {/* Secondary Preliminary Message */}
+              <button
+                onClick={() => setInquiryModalOpen(true)}
+                className="w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-[#49283F] bg-white hover:bg-[#F1E5EA] border border-[#E6DDE2] transition-colors cursor-pointer"
+              >
+                Send Preliminary Question
+              </button>
 
-                <button
-                  id="profile-message-btn"
-                  onClick={() => setInquiryModalOpen(true)}
-                  className="w-full py-2.5 px-4 text-sm font-medium text-[#17202A] hover:text-[#2563EB] bg-[#FCFCFA] hover:bg-slate-50 border border-[#E5E7EB] rounded-xl transition-colors cursor-pointer flex items-center justify-center gap-2"
-                >
-                  <MessageSquare className="w-4 h-4 text-[#64748B]" />
-                  <span>Sign in to message</span>
-                </button>
-              </div>
-
-              {/* Guarantees */}
-              <div className="pt-4 border-t border-[#F1F5F9] space-y-2.5 text-xs text-[#64748B]">
+              {/* Safeguard & Trust checklist */}
+              <div className="pt-4 border-t border-[#E6DDE2] space-y-2.5 text-xs text-[#716873]">
                 <div className="flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-[#2563EB]" />
-                  <span>100% Satisfaction Guarantee</span>
+                  <Shield className="w-4 h-4 text-[#49283F] shrink-0" />
+                  <span>100% Naira Escrow Holding</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-emerald-600" />
-                  <span>Free cancellation up to 12 hours prior</span>
+                  <Clock className="w-4 h-4 text-[#49283F] shrink-0" />
+                  <span>24-Hour Free Rescheduling Policy</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-[#F59E0B]" />
-                  <span>Payment held in Escrow until completion</span>
+                  <Lock className="w-4 h-4 text-[#49283F] shrink-0" />
+                  <span>Encrypted 1-on-1 Video Room</span>
                 </div>
               </div>
             </div>
@@ -446,67 +417,55 @@ export const ConsultantProfilePage: React.FC<ConsultantProfilePageProps> = ({
       </div>
 
       {/* Booking Modal */}
-      {bookingModalOpen && (
-        <BookingModal
-          consultant={consultant}
-          initialService={selectedService}
-          isOpen={bookingModalOpen}
-          onClose={() => setBookingModalOpen(false)}
-          onSuccess={(details) => {
-            onShowToast(
-              'Booking Successful!',
-              `Your consultation for "${details.serviceTitle}" with ${consultant.name} has been booked for ${details.date}.`,
-              'success'
-            );
-          }}
-        />
-      )}
+      <BookingModal
+        consultant={consultant}
+        initialService={selectedService}
+        isOpen={bookingModalOpen}
+        onClose={() => setBookingModalOpen(false)}
+        onSuccess={(details) => {
+          setBookingModalOpen(false);
+          onShowToast(
+            'Booking Confirmed!',
+            `Your session for "${details.serviceTitle}" is reserved. Check your email for calendar invite.`,
+            'success'
+          );
+        }}
+      />
 
-      {/* Inquiry Message Modal */}
+      {/* Preliminary Inquiry Modal */}
       {inquiryModalOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-[#321B2C]/50 backdrop-blur-xs flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setInquiryModalOpen(false)}
         >
           <div
-            className="bg-white w-full max-w-md rounded-2xl p-6 border border-[#E5E7EB] shadow-2xl space-y-4"
+            className="bg-white rounded-2xl max-w-md w-full p-6 border border-[#E6DDE2] shadow-2xl space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
-              <h3 className="font-bold text-base text-[#17202A]">Message {consultant.name}</h3>
-              <button
-                onClick={() => setInquiryModalOpen(false)}
-                className="text-[#64748B] hover:text-[#17202A]"
-              >
-                ✕
-              </button>
-            </div>
-            <p className="text-xs text-[#64748B]">
-              Ask a question or provide context about your problem before booking.
+            <h3 className="font-bold text-lg text-[#282329]">Message {consultant.name}</h3>
+            <p className="text-xs text-[#716873]">
+              Ask a quick scoping question before booking your consultation session.
             </p>
             <form onSubmit={handleSendInquiry} className="space-y-3">
-              <div>
-                <label className="block text-xs font-medium text-[#17202A] mb-1">Your Message</label>
-                <textarea
-                  rows={4}
-                  required
-                  value={inquiryMessage}
-                  onChange={(e) => setInquiryMessage(e.target.value)}
-                  placeholder="Hi Michael, I have a quick question regarding whether my fashion brand launch is suitable for your Brand Clarification session..."
-                  className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E7EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
-                />
-              </div>
-              <div className="flex justify-end gap-2 pt-2">
+              <textarea
+                required
+                rows={3}
+                value={inquiryMessage}
+                onChange={(e) => setInquiryMessage(e.target.value)}
+                placeholder="Ask about project compatibility, specific deliverable requests, or timeline..."
+                className="w-full p-3 rounded-xl border border-[#E6DDE2] text-sm text-[#282329] focus:border-[#49283F] outline-none"
+              />
+              <div className="flex justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setInquiryModalOpen(false)}
-                  className="px-4 py-2 text-xs font-medium text-[#64748B]"
+                  className="px-4 py-2 text-xs font-semibold text-[#716873] hover:text-[#282329]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-xs font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl"
+                  className="px-5 py-2 text-xs font-semibold text-white bg-[#49283F] hover:bg-[#3E2135] rounded-xl"
                 >
                   Send Inquiry
                 </button>

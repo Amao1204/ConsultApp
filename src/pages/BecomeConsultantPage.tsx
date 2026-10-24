@@ -6,11 +6,12 @@ import {
   ShieldCheck,
   CheckCircle2,
   DollarSign,
-  Clock,
+  Calendar,
+  Layers,
   Award,
-  Globe,
   Users,
-  ChevronRight,
+  Clock,
+  TrendingUp,
 } from 'lucide-react';
 
 interface BecomeConsultantPageProps {
@@ -22,259 +23,222 @@ export const BecomeConsultantPage: React.FC<BecomeConsultantPageProps> = ({
   onNavigate,
   onOpenModal,
 }) => {
-  // Interactive Earnings Calculator
-  const [sessionsPerWeek, setSessionsPerWeek] = useState(4);
-  const [pricePerSession, setPricePerSession] = useState(30000);
+  // Interactive Earnings Calculator State
+  const [hoursPerWeek, setHoursPerWeek] = useState(6);
+  const [sessionRate, setSessionRate] = useState(40000); // ₦40,000
 
-  const monthlyEarnings = sessionsPerWeek * pricePerSession * 4;
+  // Calculation: sessions/month = hoursPerWeek * 4; total = sessions * rate * 0.85 (after 15% platform fee)
+  const monthlyEarnings = hoursPerWeek * 4 * sessionRate * 0.85;
 
-  const steps = [
+  const roadmapSteps = [
     {
-      num: '01',
-      title: 'Create your profile',
-      desc: 'Build your public professional bio highlighting your industry track record and real-world accomplishments.',
+      step: '01',
+      title: 'Apply with Your Track Record',
+      description: 'Submit your LinkedIn profile, portfolio, and past client achievements. Tell us what problems you solve.',
     },
     {
-      num: '02',
-      title: 'Tell us what you know',
-      desc: 'Specify your niche problem domains, from brand identity and wardrobe architecture to software unit economics.',
+      step: '02',
+      title: 'Background Verification',
+      description: 'Our review desk audits your professional history and confirms your domain competence within 48 hours.',
     },
     {
-      num: '03',
-      title: 'Get verified',
-      desc: 'Our team reviews your credentials, LinkedIn history, and references within 48 hours to grant your Verified badge.',
+      step: '03',
+      title: 'Design Your Service Packages',
+      description: 'Set your session lengths (45m, 90m), define deliverables, and choose your consultation rates in Naira (₦).',
     },
     {
-      num: '04',
-      title: 'Add your services',
-      desc: 'Structure clear packages: 45-min rapid audits, 90-min deep dives, or multi-week execution sprints with fixed rates.',
+      step: '04',
+      title: 'Sync Your Live Calendar',
+      description: 'Connect your Google or Outlook calendar so clients can only book slots when you are actually free.',
     },
     {
-      num: '05',
-      title: 'Set your availability',
-      desc: 'Sync your Google or Outlook calendar so clients can only book times when you are truly free.',
+      step: '05',
+      title: 'Conduct High-Impact Calls',
+      description: 'Meet ambitious founders and professionals via our secure video rooms. Provide direct, actionable advice.',
     },
     {
-      num: '06',
-      title: 'Start connecting with clients',
-      desc: 'Host seamless video calls, receive instant payouts directly to your Nigerian bank account, and build a lasting reputation.',
-    },
-  ];
-
-  const benefits = [
-    {
-      icon: <Globe className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Get discovered',
-      desc: 'Put your expertise directly in front of founders, executives, and individuals actively looking for high-impact help.',
-    },
-    {
-      icon: <Award className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Build credibility',
-      desc: 'Showcase verified client reviews, past case studies, and transparent deliverables in one unified public profile.',
-    },
-    {
-      icon: <Clock className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Control your time',
-      desc: 'You dictate your own schedule. Consult for 2 hours on Saturdays or 15 hours a week — you are in complete control.',
-    },
-    {
-      icon: <DollarSign className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Earn from your expertise',
-      desc: 'Set your own pricing in Naira. Keep 85% of your earnings with instant weekly payouts directly to your local bank.',
-    },
-    {
-      icon: <Users className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Build lasting relationships',
-      desc: 'Turn a single 45-minute consultation into long-term execution partnerships, board advisory roles, or retainers.',
+      step: '06',
+      title: 'Receive Guaranteed Escrow Payouts',
+      description: 'Earnings are automatically deposited directly to your Nigerian bank account once calls are completed.',
     },
   ];
 
   return (
-    <div id="become-consultant-page" className="min-h-screen pt-24 pb-20 bg-[#FCFCFA]">
-      {/* Hero */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-16 space-y-4">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-xs font-semibold text-[#2563EB]">
-          <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
-          <span>Monetize What You Know</span>
+    <div id="become-consultant-page" className="min-h-screen pt-24 pb-20 bg-[#F8F4F0] text-[#282329]">
+      {/* Hero Section */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-16">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F1E5EA] border border-[#E6DDE2] text-xs font-semibold text-[#49283F] mb-4">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Consultant Network Invitation</span>
         </div>
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#172B4D] tracking-tight leading-tight">
-          Your expertise can solve someone's problem.
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-[#282329] tracking-tight leading-tight">
+          Monetize what you already know.
         </h1>
-        <p className="text-base sm:text-lg text-[#64748B] max-w-2xl mx-auto leading-relaxed">
-          Turn what you know into meaningful work. Build your professional presence, connect with
-          clients and earn from your expertise.
+        <p className="mt-4 text-base sm:text-lg text-[#716873] max-w-2xl mx-auto leading-relaxed">
+          Share your hard-won expertise with ambitious founders, business owners, and career changers across Africa. Set your own schedule, define your rates, and get paid securely.
         </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
+        <div className="pt-6">
           <button
             onClick={onOpenModal}
-            className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-xs transition-all active:scale-[0.98] cursor-pointer"
+            className="px-7 py-3.5 rounded-xl font-semibold text-white bg-[#49283F] hover:bg-[#3E2135] shadow-xs transition-colors cursor-pointer text-sm"
           >
-            <span>Apply as a Consultant</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => onNavigate('how-it-works')}
-            className="px-5 py-3.5 text-sm font-semibold text-[#172B4D] bg-white hover:bg-slate-50 border border-[#E5E7EB] rounded-xl transition-all cursor-pointer"
-          >
-            How It Works
+            Apply to Become a Consultant
           </button>
         </div>
       </section>
 
-      {/* Interactive Earnings Calculator Card */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#E5E7EB] shadow-xs">
+      {/* Interactive Potential Earnings Calculator */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#E6DDE2] shadow-sm">
           <div className="text-center max-w-xl mx-auto mb-8 space-y-2">
-            <h2 className="text-2xl font-bold text-[#17202A]">Calculate Your Potential Earnings</h2>
-            <p className="text-xs sm:text-sm text-[#64748B]">
-              See how much you could earn by dedicating just a few hours a week to 1-on-1 consultations.
+            <span className="text-xs font-bold uppercase tracking-wider text-[#49283F]">
+              Earnings Calculator
+            </span>
+            <h2 className="text-2xl font-bold text-[#282329]">
+              How much could you earn on ConsultAPP?
+            </h2>
+            <p className="text-xs sm:text-sm text-[#716873]">
+              Estimate your monthly earnings based on dedicated advisory hours and session rate.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            {/* Sliders */}
+            {/* Controls */}
             <div className="space-y-6">
               <div>
-                <div className="flex justify-between text-sm font-medium mb-2">
-                  <span className="text-[#17202A]">Sessions per week:</span>
-                  <span className="font-bold text-[#2563EB]">{sessionsPerWeek} sessions</span>
+                <div className="flex justify-between text-sm font-semibold text-[#282329] mb-2">
+                  <span>Advisory Hours per Week:</span>
+                  <span className="text-[#49283F] font-bold">{hoursPerWeek} hrs/week</span>
                 </div>
                 <input
                   type="range"
-                  min="1"
-                  max="15"
-                  value={sessionsPerWeek}
-                  onChange={(e) => setSessionsPerWeek(Number(e.target.value))}
-                  className="w-full accent-[#2563EB]"
+                  min="2"
+                  max="20"
+                  step="1"
+                  value={hoursPerWeek}
+                  onChange={(e) => setHoursPerWeek(Number(e.target.value))}
+                  className="w-full accent-[#49283F] cursor-pointer"
                 />
-                <div className="flex justify-between text-[11px] text-[#94A3B8] mt-1">
-                  <span>1 / wk</span>
-                  <span>8 / wk</span>
-                  <span>15 / wk</span>
+                <div className="flex justify-between text-[11px] text-[#716873] mt-1">
+                  <span>2 hrs (Part-time)</span>
+                  <span>10 hrs</span>
+                  <span>20 hrs (Fractional)</span>
                 </div>
               </div>
 
               <div>
-                <div className="flex justify-between text-sm font-medium mb-2">
-                  <span className="text-[#17202A]">Price per session:</span>
-                  <span className="font-bold text-[#2563EB]">
-                    ₦{pricePerSession.toLocaleString()}
-                  </span>
+                <div className="flex justify-between text-sm font-semibold text-[#282329] mb-2">
+                  <span>Your Consultation Rate:</span>
+                  <span className="text-[#49283F] font-bold">₦{sessionRate.toLocaleString()}</span>
                 </div>
                 <input
                   type="range"
-                  min="10000"
-                  max="100000"
+                  min="20000"
+                  max="150000"
                   step="5000"
-                  value={pricePerSession}
-                  onChange={(e) => setPricePerSession(Number(e.target.value))}
-                  className="w-full accent-[#2563EB]"
+                  value={sessionRate}
+                  onChange={(e) => setSessionRate(Number(e.target.value))}
+                  className="w-full accent-[#49283F] cursor-pointer"
                 />
-                <div className="flex justify-between text-[11px] text-[#94A3B8] mt-1">
-                  <span>₦10k</span>
-                  <span>₦50k</span>
-                  <span>₦100k</span>
+                <div className="flex justify-between text-[11px] text-[#716873] mt-1">
+                  <span>₦20,000 (Sanity check)</span>
+                  <span>₦75,000</span>
+                  <span>₦150,000 (Executive)</span>
                 </div>
               </div>
             </div>
 
-            {/* Estimated Output */}
-            <div className="bg-[#EFF6FF] rounded-2xl p-6 text-center border border-[#BFDBFE] space-y-2">
-              <span className="text-xs uppercase font-bold tracking-wider text-[#2563EB] block">
-                Estimated Monthly Earnings
+            {/* Output Display */}
+            <div className="bg-[#FAF7F4] p-6 rounded-2xl border border-[#E6DDE2] text-center space-y-3">
+              <span className="text-xs font-semibold text-[#716873] uppercase tracking-wider block">
+                Estimated Net Take-Home
               </span>
-              <div className="text-3xl sm:text-4xl font-extrabold text-[#172B4D]">
-                ₦{monthlyEarnings.toLocaleString()}
+              <div className="text-3xl sm:text-4xl font-extrabold text-[#49283F]">
+                ₦{Math.round(monthlyEarnings).toLocaleString()}
+                <span className="text-sm font-normal text-[#716873] block mt-1">/ month</span>
               </div>
-              <p className="text-xs text-[#64748B]">
-                Based on {sessionsPerWeek * 4} sessions/month at ₦{pricePerSession.toLocaleString()} each.
+              <p className="text-[11px] text-[#716873] leading-relaxed pt-2 border-t border-[#E6DDE2]">
+                Based on ~{hoursPerWeek * 4} sessions per month after platform fee. Payouts processed automatically to your verified bank account via Escrow.
               </p>
-              <div className="pt-3">
-                <button
-                  onClick={onOpenModal}
-                  className="w-full py-2.5 text-xs font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl transition-colors cursor-pointer"
-                >
-                  Start Earning
-                </button>
-              </div>
+              <button
+                onClick={onOpenModal}
+                className="w-full py-2.5 rounded-xl font-semibold text-xs text-white bg-[#49283F] hover:bg-[#3E2135] transition-colors cursor-pointer mt-2"
+              >
+                Start Advising Clients
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6-Step Roadmap */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-[#E5E7EB]">
-        <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#172B4D]">
-            How to Get Started as a Consultant
+      {/* 6-Step Onboarding Roadmap */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="text-center max-w-xl mx-auto mb-12 space-y-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#49283F]">
+            The Consultant Journey
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#282329]">
+            How onboarding works
           </h2>
-          <p className="text-sm text-[#64748B]">
-            From application to your first paid consultation in six straightforward steps.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {steps.map((s) => (
+          {roadmapSteps.map((step) => (
             <div
-              key={s.num}
-              className="bg-white rounded-2xl p-6 border border-[#E5E7EB] hover:border-[#2563EB]/40 shadow-xs space-y-3"
+              key={step.step}
+              className="bg-white p-6 rounded-2xl border border-[#E6DDE2] shadow-2xs space-y-2.5"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] text-[#2563EB] font-bold text-sm flex items-center justify-center">
-                {s.num}
-              </div>
-              <h3 className="font-bold text-base text-[#17202A]">{s.title}</h3>
-              <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">{s.desc}</p>
+              <span className="text-2xl font-extrabold text-[#49283F] block">
+                {step.step}
+              </span>
+              <h3 className="font-bold text-base text-[#282329]">{step.title}</h3>
+              <p className="text-xs sm:text-sm text-[#716873] leading-relaxed">
+                {step.description}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Consultant Benefits Grid */}
-      <section className="bg-white py-16 border-t border-[#E5E7EB]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#172B4D]">
-              Why Consult on ConsultAPP?
+      {/* What We Look For */}
+      <section className="bg-[#FAF7F4] py-16 border-y border-[#E6DDE2]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#49283F]">
+              Vetting Criteria
+            </span>
+            <h2 className="text-2xl font-bold text-[#282329]">
+              What we look for in an advisor
             </h2>
-            <p className="text-sm text-[#64748B]">
-              We handle the marketing, scheduling, calendar synchronization, and escrow payments so
-              you can focus entirely on delivering brilliant advice.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {benefits.map((b, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-[#FCFCFA] border border-[#E5E7EB] hover:border-[#2563EB]/40 transition-all space-y-3"
-              >
-                <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] flex items-center justify-center">
-                  {b.icon}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              {
+                title: 'Tangible Domain Track Record',
+                desc: '3+ years of verifiable experience executing in your chosen domain with real business outcomes.',
+              },
+              {
+                title: 'Clear Communication Skills',
+                desc: 'The ability to diagnose issues rapidly and provide constructive, pragmatic advice without fluff.',
+              },
+              {
+                title: 'Professional Integrity & Reliability',
+                desc: 'Punctuality for scheduled sessions, respect for client confidentiality, and proactive follow-through.',
+              },
+              {
+                title: 'Authentic African Market Context',
+                desc: 'First-hand insight into the legal, financial, and cultural operating landscape in Nigeria and Africa.',
+              },
+            ].map((item, i) => (
+              <div key={i} className="bg-white p-5 rounded-2xl border border-[#E6DDE2] flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#49283F] shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-bold text-sm text-[#282329]">{item.title}</h4>
+                  <p className="text-xs text-[#716873] mt-1 leading-relaxed">{item.desc}</p>
                 </div>
-                <h3 className="font-bold text-base text-[#17202A]">{b.title}</h3>
-                <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">{b.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 text-center">
-        <div className="bg-[#172B4D] text-white rounded-3xl p-8 sm:p-12 space-y-4">
-          <h2 className="text-2xl sm:text-3xl font-bold">Ready to apply?</h2>
-          <p className="text-sm text-[#CBD5E1] max-w-md mx-auto">
-            Applications take under 5 minutes. Join our growing community of high-impact Nigerian
-            practitioners.
-          </p>
-          <div className="pt-2">
-            <button
-              onClick={onOpenModal}
-              className="px-6 py-3 text-sm font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-xs transition-colors cursor-pointer"
-            >
-              Apply as a Consultant
-            </button>
           </div>
         </div>
       </section>

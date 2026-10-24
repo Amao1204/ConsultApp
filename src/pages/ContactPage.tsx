@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
-import { Mail, MessageSquare, Phone, MapPin, CheckCircle2, Clock, Send, Sparkles } from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Send,
+  CheckCircle2,
+  ShieldCheck,
+  MessageSquare,
+} from 'lucide-react';
 
 interface ContactPageProps {
   onNavigate: (page: PageId) => void;
@@ -13,124 +22,112 @@ export const ContactPage: React.FC<ContactPageProps> = ({
 }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [reason, setReason] = useState('General enquiries');
+  const [department, setDepartment] = useState('support');
+  const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
-
-  const reasons = [
-    'General enquiries',
-    'Consultant support',
-    'Business enquiries',
-    'Technical support',
-  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
     onShowToast(
-      'Message Dispatched',
-      `Thank you, ${name}. Your message has been routed to our ${reason} team. We will respond to ${email} within 24 hours.`,
+      'Message Received',
+      `Thank you, ${name}. Our ${department} team will respond to ${email} within 4 hours.`,
       'success'
     );
   };
 
   return (
-    <div id="contact-page" className="min-h-screen pt-24 pb-20 bg-[#FCFCFA]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto pt-8 pb-14 space-y-3">
-          <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]">
-            Get In Touch
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#172B4D] tracking-tight">
-            Have a question? Let's talk.
-          </h1>
-          <p className="text-base text-[#64748B]">
-            Whether you are booking your first session, applying to consult, or exploring enterprise
-            advisory, our support team is on standby.
-          </p>
+    <div id="contact-page" className="min-h-screen pt-24 pb-20 bg-[#F8F4F0] text-[#282329]">
+      {/* Hero */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-12">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F1E5EA] border border-[#E6DDE2] text-xs font-semibold text-[#49283F] mb-4">
+          <MessageSquare className="w-3.5 h-3.5" />
+          <span>Direct Communications Desk</span>
         </div>
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-[#282329] tracking-tight leading-tight">
+          How can we help you?
+        </h1>
+        <p className="mt-4 text-base sm:text-lg text-[#716873] max-w-xl mx-auto leading-relaxed">
+          Whether you need support with an active consultation, have questions about verification, or want to explore corporate advisory — we are here.
+        </p>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Contact Info Sidebar */}
-          <div className="lg:col-span-1 space-y-6">
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E5E7EB] shadow-xs space-y-6">
-              <div>
-                <h3 className="text-lg font-bold text-[#17202A] mb-1">Direct Channels</h3>
-                <p className="text-xs text-[#64748B]">
-                  Reach out through whichever medium is most convenient for you.
-                </p>
-              </div>
+      {/* Main Grid: Info + Form */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Column: Office & Channels (5 cols) */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="bg-white rounded-3xl p-8 border border-[#E6DDE2] shadow-xs space-y-6">
+              <h3 className="font-bold text-xl text-[#282329]">Direct Contact Channels</h3>
 
-              <div className="space-y-4 text-sm text-[#475569]">
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center shrink-0">
+              <div className="space-y-4 text-xs sm:text-sm text-[#716873]">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 rounded-xl bg-[#F1E5EA] flex items-center justify-center shrink-0 text-[#49283F]">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-[#17202A] block">Email Us</span>
-                    <a
-                      href="mailto:support@consultapp.io"
-                      className="text-xs text-[#2563EB] hover:underline"
-                    >
-                      support@consultapp.io
+                    <span className="block font-semibold text-[#282329]">Email Support</span>
+                    <a href="mailto:support@consultapp.ng" className="text-[#49283F] hover:underline">
+                      support@consultapp.ng
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center shrink-0">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 rounded-xl bg-[#F1E5EA] flex items-center justify-center shrink-0 text-[#49283F]">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-[#17202A] block">Phone & WhatsApp</span>
-                    <span className="text-xs text-[#64748B]">+234 (0) 800-CONSULT</span>
+                    <span className="block font-semibold text-[#282329]">Telephone & WhatsApp</span>
+                    <span>+234 (0) 1 888 4590 / +234 812 000 7890</span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center shrink-0">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 rounded-xl bg-[#F1E5EA] flex items-center justify-center shrink-0 text-[#49283F]">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-[#17202A] block">Physical Office</span>
-                    <span className="text-xs text-[#64748B] leading-relaxed">
-                      Victoria Island, Lagos, Nigeria
-                    </span>
+                    <span className="block font-semibold text-[#282329]">Lagos Operations Office</span>
+                    <span>Level 4, Heritage Place, 21 Lugard Avenue, Ikoyi, Lagos, Nigeria</span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center shrink-0">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 rounded-xl bg-[#F1E5EA] flex items-center justify-center shrink-0 text-[#49283F]">
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-[#17202A] block">Support Hours</span>
-                    <span className="text-xs text-[#64748B]">
-                      Monday – Saturday: 8:00 AM – 8:00 PM WAT
-                    </span>
+                    <span className="block font-semibold text-[#282329]">Operating Hours</span>
+                    <span>Monday – Friday: 8:00 AM – 7:00 PM WAT</span>
+                    <span className="block text-[#166534] font-medium mt-0.5">Escrow & dispute line monitored 24/7</span>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="p-4 bg-[#FCFCFA] rounded-2xl border border-[#E5E7EB] text-xs text-[#64748B] space-y-1">
-                <span className="font-semibold text-[#17202A] block">Urgent Consultation Issue?</span>
-                <p>
-                  If you have an active session starting in the next 30 minutes, mention your booking ID
-                  in the subject for priority routing.
-                </p>
+            <div className="p-6 rounded-3xl bg-[#FAF7F4] border border-[#E6DDE2] flex items-start gap-3 text-xs text-[#716873]">
+              <ShieldCheck className="w-5 h-5 text-[#49283F] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-[#282329]">Escrow Protection Promise:</strong> If you are reaching out regarding an active booking dispute or technical failure, our dedicated resolution team prioritizes your ticket within 2 hours.
               </div>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#E5E7EB] shadow-xs">
+          {/* Right Column: Contact Intake Form (7 cols) */}
+          <div className="lg:col-span-7">
+            <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#E6DDE2] shadow-sm">
+              <h3 className="text-xl font-bold text-[#282329] mb-1">Send a Message</h3>
+              <p className="text-xs sm:text-sm text-[#716873] mb-6">
+                Fill in the details below and your inquiry will be routed to the appropriate specialist.
+              </p>
+
               {!submitted ? (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-[#17202A] mb-1.5">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#282329] mb-1">
                         Your Full Name
                       </label>
                       <input
@@ -138,89 +135,93 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                         required
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="e.g. Adebayo Ogunlesi"
-                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E5E7EB] focus:ring-2 focus:ring-[#2563EB] focus:outline-none"
+                        placeholder="e.g. Femi Alabi"
+                        className="w-full p-2.5 rounded-xl border border-[#E6DDE2] text-sm text-[#282329] focus:border-[#49283F] outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-[#17202A] mb-1.5">
-                        Your Email Address
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#282329] mb-1">
+                        Email Address
                       </label>
                       <input
                         type="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="adebayo@example.com"
-                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E5E7EB] focus:ring-2 focus:ring-[#2563EB] focus:outline-none"
+                        placeholder="femi@example.com"
+                        className="w-full p-2.5 rounded-xl border border-[#E6DDE2] text-sm text-[#282329] focus:border-[#49283F] outline-none"
                       />
                     </div>
                   </div>
 
-                  {/* Reason for contacting */}
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#17202A] mb-2">
-                      Reason for Contacting
-                    </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {reasons.map((r) => (
-                        <button
-                          type="button"
-                          key={r}
-                          onClick={() => setReason(r)}
-                          className={`p-2.5 text-xs font-medium rounded-xl text-left border transition-all cursor-pointer ${
-                            reason === r
-                              ? 'border-[#2563EB] bg-[#EFF6FF] text-[#2563EB] font-bold'
-                              : 'border-[#E5E7EB] bg-white text-[#475569] hover:bg-slate-50'
-                          }`}
-                        >
-                          {r}
-                        </button>
-                      ))}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#282329] mb-1">
+                        Department
+                      </label>
+                      <select
+                        value={department}
+                        onChange={(e) => setDepartment(e.target.value)}
+                        className="w-full p-2.5 rounded-xl border border-[#E6DDE2] text-sm text-[#282329] focus:border-[#49283F] outline-none bg-white cursor-pointer"
+                      >
+                        <option value="General Support">General Client Support</option>
+                        <option value="Escrow & Payments">Escrow & Billing Assistance</option>
+                        <option value="Consultant Verification">Consultant Verification Desk</option>
+                        <option value="Corporate Advisory">Corporate Partnerships</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#282329] mb-1">
+                        Subject
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
+                        placeholder="e.g. Question about upcoming booking"
+                        className="w-full p-2.5 rounded-xl border border-[#E6DDE2] text-sm text-[#282329] focus:border-[#49283F] outline-none"
+                      />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#17202A] mb-1.5">
-                      Your Message
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#282329] mb-1">
+                      Message
                     </label>
                     <textarea
-                      rows={5}
                       required
+                      rows={4}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Please let us know how we can assist you..."
-                      className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-[#E5E7EB] focus:ring-2 focus:ring-[#2563EB] focus:outline-none"
+                      placeholder="Please include relevant booking details or questions so we can assist promptly..."
+                      className="w-full p-2.5 rounded-xl border border-[#E6DDE2] text-sm text-[#282329] focus:border-[#49283F] outline-none"
                     />
                   </div>
 
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-xs transition-all active:scale-[0.98] cursor-pointer"
+                      className="w-full py-3 rounded-xl font-semibold text-white bg-[#49283F] hover:bg-[#3E2135] shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer"
                     >
-                      <span>Send Message</span>
                       <Send className="w-4 h-4" />
+                      <span>Transmit Message</span>
                     </button>
                   </div>
                 </form>
               ) : (
-                <div className="text-center py-10 space-y-4">
-                  <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                <div className="p-8 text-center space-y-4 animate-fade-in">
+                  <div className="w-14 h-14 rounded-full bg-[#F1E5EA] text-[#49283F] flex items-center justify-center mx-auto">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#17202A]">Message Received!</h3>
-                  <p className="text-sm text-[#64748B] max-w-md mx-auto">
-                    Thank you for contacting ConsultAPP. Our team has received your inquiry and will
-                    follow up directly at <strong className="text-[#17202A]">{email}</strong> within
-                    24 business hours.
+                  <h4 className="text-xl font-bold text-[#282329]">Message Transmitted</h4>
+                  <p className="text-sm text-[#716873] max-w-sm mx-auto">
+                    Thank you, <strong>{name}</strong>! Your inquiry regarding "{subject}" has been delivered to our {department} team. A specialist will reply to <strong>{email}</strong> shortly.
                   </p>
                   <button
-                    onClick={() => {
-                      setSubmitted(false);
-                      setMessage('');
-                    }}
-                    className="px-5 py-2 text-xs font-semibold text-[#2563EB] bg-[#EFF6FF] rounded-xl hover:bg-[#DBEAFE] transition-colors cursor-pointer"
+                    onClick={() => setSubmitted(false)}
+                    className="text-xs font-semibold text-[#49283F] hover:underline cursor-pointer"
                   >
                     Send another message
                   </button>
@@ -229,7 +230,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

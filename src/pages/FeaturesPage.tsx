@@ -1,18 +1,20 @@
 import React from 'react';
 import { PageId } from '../types';
 import {
-  Compass,
   Search,
   UserCheck,
-  CreditCard,
   Calendar,
-  Clock,
+  Lock,
   MessageSquare,
-  ShieldCheck,
-  Star,
   Layers,
-  CheckCircle2,
+  Star,
+  Clock,
+  Sparkles,
   ArrowRight,
+  ShieldCheck,
+  CheckCircle2,
+  SlidersHorizontal,
+  FileCheck,
 } from 'lucide-react';
 
 interface FeaturesPageProps {
@@ -20,227 +22,181 @@ interface FeaturesPageProps {
 }
 
 export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate }) => {
-  const features = [
+  const featureGroups = [
     {
-      icon: <Compass className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Expert Discovery',
-      badge: 'Discovery',
-      description:
-        'Find professionals by category, sub-specialty, industry experience, and proven track record across Nigeria and the diaspora.',
-      visualMockup: (
-        <div className="bg-[#FCFCFA] p-3 rounded-xl border border-[#E5E7EB] text-xs space-y-1.5">
-          <div className="flex items-center justify-between font-semibold text-[#17202A]">
-            <span>Filter: Brand Strategy</span>
-            <span className="text-[#2563EB]">142 active experts</span>
-          </div>
-          <div className="flex gap-1.5 flex-wrap">
-            <span className="px-2 py-0.5 rounded bg-white border border-[#E5E7EB] text-[10px]">
-              E-commerce
-            </span>
-            <span className="px-2 py-0.5 rounded bg-white border border-[#E5E7EB] text-[10px]">
-              FinTech
-            </span>
-            <span className="px-2 py-0.5 rounded bg-white border border-[#E5E7EB] text-[10px]">
-              DTC Packaging
-            </span>
-          </div>
-        </div>
-      ),
+      groupTitle: 'Discovery & Matching',
+      groupDescription: 'Find the right practitioner quickly without wading through irrelevant resumes.',
+      features: [
+        {
+          title: 'Problem-First Search',
+          description:
+            'Describe what you are trying to figure out in plain language. Our algorithm parses your intent and surfaces consultants with matching project experience.',
+          tag: 'Natural Language Search',
+          icon: <Search className="w-5 h-5 text-[#49283F]" />,
+        },
+        {
+          title: 'Verified Track Records',
+          description:
+            'Every expert on ConsultAPP goes through a rigorous manual review of past client work, employment history, and business registrations.',
+          tag: 'Manual Review & KYC',
+          icon: <UserCheck className="w-5 h-5 text-[#49283F]" />,
+        },
+        {
+          title: 'Granular Multi-Filter Engine',
+          description:
+            'Filter by price bracket in Naira (₦), minimum client review ratings, immediate same-day availability, and specific domain tags.',
+          tag: 'Precision Discovery',
+          icon: <SlidersHorizontal className="w-5 h-5 text-[#49283F]" />,
+        },
+      ],
     },
     {
-      icon: <Search className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Smart Search',
-      badge: 'Natural Language',
-      description:
-        "Describe what you're trying to solve in plain English, and ConsultAPP automatically maps your request to the most relevant practitioners.",
-      visualMockup: (
-        <div className="bg-[#FCFCFA] p-3 rounded-xl border border-[#E5E7EB] text-xs">
-          <span className="text-[#94A3B8] italic block mb-1">"I need help planning an event"</span>
-          <div className="flex items-center gap-1.5 text-[#2563EB] font-medium">
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>Suggested: Corporate Production Strategist</span>
-          </div>
-        </div>
-      ),
+      groupTitle: 'Scheduling & Payments',
+      groupDescription: 'Frictionless calendar booking and 100% secure Naira payment holding.',
+      features: [
+        {
+          title: 'Live Calendar Availability',
+          description:
+            'See up-to-the-minute open slots on the consultant’s real calendar. Avoid days of scheduling back-and-forth.',
+          tag: 'Direct Calendar Sync',
+          icon: <Calendar className="w-5 h-5 text-[#49283F]" />,
+        },
+        {
+          title: 'Naira (₦) Escrow Holding',
+          description:
+            'Your payment is safely held by ConsultAPP. Funds are only transferred to the consultant after the session concludes smoothly.',
+          tag: 'Buyer Protection',
+          icon: <Lock className="w-5 h-5 text-[#49283F]" />,
+        },
+        {
+          title: 'Transparent Deliverables',
+          description:
+            'Know exactly what you are paying for before confirming. Each service package lists durations, checklists, and post-session follow-up windows.',
+          tag: 'Explicit Scope',
+          icon: <FileCheck className="w-5 h-5 text-[#49283F]" />,
+        },
+      ],
     },
     {
-      icon: <UserCheck className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Consultant Profiles',
-      badge: 'Transparency',
-      description:
-        'Understand exactly who you are booking before committing: past client results, verified credentials, sample deliverables, and ratings.',
-      visualMockup: (
-        <div className="bg-[#FCFCFA] p-3 rounded-xl border border-[#E5E7EB] text-xs space-y-1">
-          <div className="flex justify-between items-center">
-            <span className="font-bold text-[#17202A]">Michael Adeyemi</span>
-            <span className="text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded text-[10px]">
-              Verified
-            </span>
-          </div>
-          <span className="text-[#64748B] block text-[11px]">11 Yrs Exp • 340 Consultations</span>
-        </div>
-      ),
-    },
-    {
-      icon: <CreditCard className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Transparent Pricing',
-      badge: 'No Surprises',
-      description:
-        'Know what a consultation costs up front in Nigerian Naira (₦). No surprise hourly billing or vague agency retainers.',
-      visualMockup: (
-        <div className="bg-[#FCFCFA] p-3 rounded-xl border border-[#E5E7EB] flex items-center justify-between text-xs">
-          <span className="text-[#64748B]">Strategy Audit</span>
-          <span className="font-bold text-[#17202A] text-sm">₦35,000 / flat</span>
-        </div>
-      ),
-    },
-    {
-      icon: <Clock className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Live Availability',
-      badge: 'Instant Scheduling',
-      description:
-        'See when consultants are open. Book a same-day urgent slot or schedule a future working session in seconds.',
-      visualMockup: (
-        <div className="bg-[#FCFCFA] p-3 rounded-xl border border-[#E5E7EB] text-xs flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-emerald-700 font-medium">Available today at 3:00 PM WAT</span>
-        </div>
-      ),
-    },
-    {
-      icon: <Calendar className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Direct Booking',
-      badge: 'Zero Friction',
-      description:
-        'Schedule consultations without back-and-forth emails. Calendar invites and video room links generate automatically.',
-      visualMockup: (
-        <div className="bg-[#FCFCFA] p-3 rounded-xl border border-[#E5E7EB] text-xs flex justify-between items-center">
-          <span className="font-medium text-[#17202A]">consultapp.io/room/c-92</span>
-          <span className="text-[10px] bg-[#EFF6FF] text-[#2563EB] px-2 py-0.5 rounded">
-            Google Meet / Zoom
-          </span>
-        </div>
-      ),
-    },
-    {
-      icon: <MessageSquare className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Direct Messaging',
-      badge: 'Collaboration',
-      description:
-        'Communicate with your consultant before and after your session. Share brief documents, links, and questions seamlessly.',
-      visualMockup: (
-        <div className="bg-[#FCFCFA] p-3 rounded-xl border border-[#E5E7EB] text-xs space-y-1">
-          <div className="bg-white p-2 rounded-lg border border-[#E5E7EB] text-[#475569]">
-            "Here is the draft pitch deck we discussed on the call."
-          </div>
-        </div>
-      ),
-    },
-    {
-      icon: <ShieldCheck className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Secure Payments & Escrow',
-      badge: 'Protected',
-      description:
-        'Make payments via cards, USSD, or bank transfer in Naira. Funds remain in escrow until session completion.',
-      visualMockup: (
-        <div className="bg-[#FCFCFA] p-3 rounded-xl border border-[#E5E7EB] text-xs flex items-center justify-between">
-          <span className="text-emerald-700 font-medium">Escrow Protected</span>
-          <span className="text-[#64748B]">Paystack / Flutterwave</span>
-        </div>
-      ),
-    },
-    {
-      icon: <Star className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Verified Reviews',
-      badge: 'Accountability',
-      description:
-        'Only verified clients who paid for and attended a session can leave feedback, guaranteeing honest testimonials.',
-      visualMockup: (
-        <div className="bg-[#FCFCFA] p-3 rounded-xl border border-[#E5E7EB] text-xs space-y-1">
-          <div className="flex items-center text-[#F59E0B] font-bold">
-            <span>★★★★★ 5.0</span>
-            <span className="text-[#64748B] font-normal ml-2 text-[10px]">• Verified Client</span>
-          </div>
-        </div>
-      ),
-    },
-    {
-      icon: <Layers className="w-6 h-6 text-[#2563EB]" />,
-      title: 'Execution Support',
-      badge: 'Action-Oriented',
-      description:
-        'Continue working with consultants when the solution requires implementation — from brand sprints to operational rollouts.',
-      visualMockup: (
-        <div className="bg-[#FCFCFA] p-3 rounded-xl border border-[#E5E7EB] text-xs flex items-center justify-between">
-          <span className="font-semibold text-[#17202A]">Execution Sprint: Milestone 1/3</span>
-          <span className="text-[#2563EB] font-bold">Active</span>
-        </div>
-      ),
+      groupTitle: 'Consultation & Delivery',
+      groupDescription: 'Actionable guidance and ongoing implementation partnerships.',
+      features: [
+        {
+          title: 'High-Definition Video Rooms',
+          description:
+            'Join your 1-on-1 strategy call with one click. Share screens, pitch decks, spreadsheets, and financial models securely.',
+          tag: 'Encrypted Meetings',
+          icon: <MessageSquare className="w-5 h-5 text-[#49283F]" />,
+        },
+        {
+          title: 'Execution Sprints',
+          description:
+            'Need hands-on work done? Transition seamlessly from consultation into a milestone-backed project sprint with agreed delivery dates.',
+          tag: 'Milestone Contracts',
+          icon: <Layers className="w-5 h-5 text-[#49283F]" />,
+        },
+        {
+          title: 'Verified Client Reviews',
+          description:
+            'Read genuine reviews left exclusively by clients who completed booked sessions through ConsultAPP. No fabricated testimonials.',
+          tag: 'Verified Feedback',
+          icon: <Star className="w-5 h-5 text-[#49283F]" />,
+        },
+      ],
     },
   ];
 
   return (
-    <div id="features-page" className="min-h-screen pt-24 pb-20 bg-[#FCFCFA]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto pt-8 pb-16 space-y-4">
-          <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]">
-            Platform Capabilities
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#172B4D] tracking-tight">
-            Everything you need to get expert help.
-          </h1>
-          <p className="text-base sm:text-lg text-[#64748B] max-w-2xl mx-auto leading-relaxed">
-            Designed specifically to eliminate the friction, opacity, and hesitation of finding
-            world-class professional guidance.
-          </p>
+    <div id="features-page" className="min-h-screen pt-24 pb-20 bg-[#F8F4F0] text-[#282329]">
+      {/* Hero Section */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-16">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F1E5EA] border border-[#E6DDE2] text-xs font-semibold text-[#49283F] mb-4">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Platform Capabilities & Safeguards</span>
         </div>
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-[#282329] tracking-tight leading-tight">
+          Built for clarity, speed, and real execution.
+        </h1>
+        <p className="mt-4 text-base sm:text-lg text-[#716873] max-w-2xl mx-auto leading-relaxed">
+          Explore the tools and structural safeguards that make ConsultAPP the most reliable way to find and work with verified African experts.
+        </p>
+      </section>
 
-        {/* 10 Feature Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((item, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-2xl p-6 border border-[#E5E7EB] hover:border-[#2563EB]/40 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-xl bg-[#FCFCFA] border border-[#E5E7EB] flex items-center justify-center">
-                    {item.icon}
+      {/* Feature Groups */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 pb-20">
+        {featureGroups.map((group, gIdx) => (
+          <div key={gIdx} className="space-y-6">
+            <div className="border-b border-[#E6DDE2] pb-4">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#49283F]">
+                Group 0{gIdx + 1}
+              </span>
+              <h2 className="text-2xl font-bold text-[#282329] tracking-tight mt-0.5">
+                {group.groupTitle}
+              </h2>
+              <p className="text-sm text-[#716873] mt-1">
+                {group.groupDescription}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {group.features.map((feature, fIdx) => (
+                <div
+                  key={fIdx}
+                  className="bg-white rounded-2xl p-6 border border-[#E6DDE2] shadow-2xs hover:border-[#D9B9C7] hover:shadow-xs transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-[#F1E5EA] flex items-center justify-center text-[#49283F]">
+                        {feature.icon}
+                      </div>
+                      <span className="text-[11px] font-semibold text-[#49283F] bg-[#FAF7F4] border border-[#E6DDE2] px-2.5 py-0.5 rounded-md">
+                        {feature.tag}
+                      </span>
+                    </div>
+
+                    <h3 className="font-bold text-lg text-[#282329] mb-2">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-[#716873] leading-relaxed">
+                      {feature.description}
+                    </p>
                   </div>
-                  <span className="text-[11px] font-semibold text-[#64748B] bg-[#F1F5F9] px-2.5 py-0.5 rounded-full">
-                    {item.badge}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold text-[#17202A]">{item.title}</h3>
-                <p className="text-sm text-[#64748B] leading-relaxed">{item.description}</p>
-              </div>
 
-              {/* Visual mini-mockup */}
-              <div className="mt-5 pt-4 border-t border-[#F8FAFC]">
-                {item.visualMockup}
+                  <div className="pt-4 mt-4 border-t border-[#E6DDE2] flex items-center gap-2 text-xs font-semibold text-[#49283F]">
+                    <CheckCircle2 className="w-4 h-4 text-[#49283F]" />
+                    <span>Active on all client bookings</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* Trust & Naira Security Banner */}
+      <section className="bg-[#FAF7F4] py-14 border-y border-[#E6DDE2]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#F1E5EA] flex items-center justify-center shrink-0 text-[#49283F]">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <div>
+                <h4 className="font-bold text-lg text-[#282329]">The ConsultAPP Satisfaction Guarantee</h4>
+                <p className="text-sm text-[#716873] mt-0.5 max-w-xl">
+                  If your consultant fails to show up or if the session does not match the agreed deliverables, our dispute desk resolves the issue or refunds your escrow within 24 hours.
+                </p>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Bottom Conversion Strip */}
-        <div className="mt-16 bg-[#172B4D] text-white rounded-3xl p-8 sm:p-12 text-center max-w-4xl mx-auto space-y-4">
-          <h2 className="text-2xl sm:text-3xl font-bold">Ready to test the experience?</h2>
-          <p className="text-sm sm:text-base text-[#CBD5E1] max-w-lg mx-auto">
-            Discover verified Nigerian specialists who can answer your burning questions today.
-          </p>
-          <div className="pt-2">
             <button
               onClick={() => onNavigate('explore')}
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-xs transition-colors cursor-pointer"
+              className="px-5 py-3 rounded-xl font-semibold text-white bg-[#49283F] hover:bg-[#3E2135] shadow-xs transition-colors shrink-0 cursor-pointer"
             >
-              <span>Explore All Consultants</span>
-              <ArrowRight className="w-4 h-4" />
+              Explore Consultants
             </button>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

@@ -1,14 +1,6 @@
 import React from 'react';
 import { PageId } from '../types';
-import {
-  ShieldCheck,
-  Compass,
-  HeartHandshake,
-  Zap,
-  ArrowRight,
-  CheckCircle2,
-  Users,
-} from 'lucide-react';
+import { ShieldCheck, Target, HeartHandshake, Zap, ArrowRight, Sparkles, Award } from 'lucide-react';
 
 interface AboutPageProps {
   onNavigate: (page: PageId) => void;
@@ -21,130 +13,114 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 }) => {
   const values = [
     {
-      title: 'Trust',
-      desc: "People should know who they're dealing with. Every consultant is verified for identity, background, and proven track record.",
-      icon: <ShieldCheck className="w-6 h-6 text-[#2563EB]" />,
+      title: 'Clarity over noise',
+      description:
+        'General search engines and social feeds drown you in conflicting opinions. We curate proven practitioners who provide direct, tailored clarity for your specific reality.',
+      icon: <Target className="w-5 h-5 text-[#49283F]" />,
     },
     {
-      title: 'Clarity',
-      desc: 'The experience should never feel confusing. Transparent pricing in Naira, clear deliverables, and no hidden retainer traps.',
-      icon: <Compass className="w-6 h-6 text-[#2563EB]" />,
+      title: 'Trust as currency',
+      description:
+        'In emerging markets, access without trust is dangerous. Every consultant on our platform is identity-verified with vetted credentials and Naira escrow protection.',
+      icon: <ShieldCheck className="w-5 h-5 text-[#49283F]" />,
     },
     {
-      title: 'Human Connection',
-      desc: 'Technology should make expertise more accessible, not less human. Real conversations with empathetic practitioners.',
-      icon: <HeartHandshake className="w-6 h-6 text-[#2563EB]" />,
+      title: 'Human connection',
+      description:
+        'AI can synthesize information, but it cannot share lived contextual intuition. A 45-minute conversation with someone who has actually built in Lagos or Nairobi changes everything.',
+      icon: <HeartHandshake className="w-5 h-5 text-[#49283F]" />,
     },
     {
-      title: 'Action',
-      desc: 'Good advice should help people move forward. We bridge the gap between conversations and actual implementation.',
-      icon: <Zap className="w-6 h-6 text-[#2563EB]" />,
+      title: 'Actionable execution',
+      description:
+        'Advice is worthless if it remains theoretical. We prioritize consultants who give you structured action notes and are willing to partner through execution sprints.',
+      icon: <Zap className="w-5 h-5 text-[#49283F]" />,
     },
   ];
 
   return (
-    <div id="about-page" className="min-h-screen pt-24 pb-20 bg-[#FCFCFA]">
-      {/* Editorial Storytelling Hero */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-16 space-y-5">
-        <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]">
-          Our Philosophy
-        </span>
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#172B4D] tracking-tight leading-tight">
-          We're building a better way to ask for help.
+    <div id="about-page" className="min-h-screen pt-24 pb-20 bg-[#F8F4F0] text-[#282329]">
+      {/* Editorial Hero */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-16 space-y-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F1E5EA] border border-[#E6DDE2] text-xs font-semibold text-[#49283F]">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Our Purpose & Philosophy</span>
+        </div>
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#282329] tracking-tight leading-tight">
+          Whatever you're figuring out,{' '}
+          <span className="text-[#49283F]">someone has already navigated it.</span>
         </h1>
-        <p className="text-base sm:text-lg text-[#64748B] max-w-2xl mx-auto leading-relaxed">
-          People know different things. People face different problems. Sometimes the hardest part
-          isn't solving the problem — it's knowing who to ask.
+        <p className="text-base sm:text-lg text-[#716873] max-w-2xl mx-auto leading-relaxed">
+          We built ConsultAPP to bridge the gap between ambitious builders across Nigeria and the seasoned practitioners who hold the missing piece of the puzzle.
         </p>
       </section>
 
-      {/* Story Narrative Section */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#E5E7EB] shadow-xs space-y-6 text-[#475569] text-base sm:text-lg leading-relaxed">
-          <p>
-            When you are starting a fashion brand in Lagos, negotiating an executive salary in Abuja,
-            budgeting a 1,000-person summit, or fixing an SME cash leak, search engines give you
-            generic articles, and social media gives you noise.
-          </p>
-          <p>
-            Traditional consulting firms charge millions of Naira for bloated slide decks that take
-            six months to deliver. Meanwhile, brilliant practitioners with the exact answers you need
-            are right in your city — yet nearly impossible to reach without awkward personal
-            favors.
-          </p>
-          <div className="p-6 bg-[#FCFCFA] rounded-2xl border-l-4 border-[#2563EB] italic text-[#172B4D] font-medium text-lg">
-            "ConsultAPP exists to make that connection easier. Because whatever you're figuring out,
-            someone has already solved it."
+      {/* Narrative Section - Editorial Split */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#E6DDE2] shadow-sm space-y-6">
+          <div className="max-w-3xl space-y-4 text-base text-[#282329] leading-relaxed">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#282329]">
+              The Problem with Figuring It Out Alone
+            </h2>
+            <p>
+              In Africa's dynamic business environment, making the wrong decision is costly. Whether you're sourcing fabrics for a luxury fashion line, negotiating food supply chain logistics, restructuring corporate governance, or planning an event under intense deadlines — traditional advice is either too theoretical or locked behind multi-million Naira agency retainers.
+            </p>
+            <p>
+              Meanwhile, thousands of elite Nigerian and African operators have already solved these exact bottlenecks. Their insights are invaluable, but until now, access was limited to personal WhatsApp networks and casual introductions.
+            </p>
+            <p className="font-semibold text-[#49283F]">
+              ConsultAPP democratizes access to this expertise. We make booking a verified expert as seamless and transparent as hailing a ride.
+            </p>
           </div>
-          <p>
-            We built ConsultAPP as an open expertise marketplace: a place where anyone with a problem
-            can sit across from a trusted human practitioner, get answers in 45 minutes, and work
-            together to see the solution through to completion.
-          </p>
         </div>
       </section>
 
-      {/* Mission */}
-      <section className="bg-[#172B4D] text-white py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <span className="text-xs uppercase font-bold tracking-widest text-[#93C5FD]">
-            Our Mission
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight max-w-2xl mx-auto leading-snug">
-            To make expertise easier to find, easier to access, and easier to turn into action.
-          </h2>
-          <p className="text-sm sm:text-base text-[#CBD5E1] max-w-lg mx-auto">
-            Democratizing access to high-impact advice for builders, creators, founders, and
-            individuals throughout Africa.
-          </p>
-        </div>
-      </section>
-
-      {/* Four Values Grid */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      {/* Core Values */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div className="text-center max-w-xl mx-auto mb-12 space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#172B4D]">The Values That Guide Us</h2>
-          <p className="text-sm text-[#64748B]">
-            How we design the platform, vet consultants, and treat our community.
-          </p>
+          <span className="text-xs font-bold uppercase tracking-wider text-[#49283F]">
+            Guiding Principles
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#282329]">
+            The values that drive ConsultAPP
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {values.map((v, idx) => (
+          {values.map((v, i) => (
             <div
-              key={idx}
-              className="bg-white rounded-2xl p-8 border border-[#E5E7EB] hover:border-[#2563EB]/40 shadow-xs space-y-3"
+              key={i}
+              className="bg-white p-7 rounded-2xl border border-[#E6DDE2] shadow-2xs space-y-3"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#EFF6FF] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-[#F1E5EA] flex items-center justify-center text-[#49283F]">
                 {v.icon}
               </div>
-              <h3 className="text-xl font-bold text-[#17202A]">{v.title}</h3>
-              <p className="text-sm text-[#64748B] leading-relaxed">{v.desc}</p>
+              <h3 className="font-bold text-lg text-[#282329]">{v.title}</h3>
+              <p className="text-sm text-[#716873] leading-relaxed">{v.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Community Call to Action */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#E5E7EB] shadow-xs space-y-5">
-          <h3 className="text-2xl font-bold text-[#17202A]">Join the ConsultAPP Community</h3>
-          <p className="text-sm text-[#64748B] max-w-md mx-auto">
-            Whether you need clarity on your next move or have hard-earned expertise to share, you
-            belong here.
+      {/* CTA Section */}
+      <section className="bg-[#321B2C] py-16 text-white text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <h2 className="text-3xl font-bold">Join the Expertise Movement</h2>
+          <p className="text-sm sm:text-base text-[#D9B9C7] max-w-lg mx-auto">
+            Whether you need actionable guidance today or have hard-won expertise to share with the continent, there's a place for you on ConsultAPP.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <button
               onClick={() => onNavigate('explore')}
-              className="px-6 py-3 text-sm font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-xs transition-colors cursor-pointer"
+              className="px-6 py-3 rounded-xl font-semibold text-[#321B2C] bg-[#F8F4F0] hover:bg-white transition-colors cursor-pointer"
             >
-              Find an Expert
+              Explore Consultants
             </button>
             <button
               onClick={onOpenBecomeModal}
-              className="px-6 py-3 text-sm font-semibold text-[#172B4D] bg-[#FCFCFA] hover:bg-slate-50 border border-[#E5E7EB] rounded-xl transition-colors cursor-pointer"
+              className="px-6 py-3 rounded-xl font-semibold text-white bg-transparent hover:bg-white/10 border border-[#D9B9C7]/40 transition-colors cursor-pointer"
             >
-              Become a Consultant
+              Apply as an Expert
             </button>
           </div>
         </div>

@@ -1,28 +1,75 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
-import { GENERAL_FAQS } from '../data/mockData';
-import { ChevronDown, Search, HelpCircle, MessageSquare, ArrowRight } from 'lucide-react';
+import { ChevronDown, Search, HelpCircle, ArrowRight, ShieldCheck, Lock } from 'lucide-react';
 
 interface FaqPageProps {
   onNavigate: (page: PageId) => void;
 }
 
-export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
-  const [openId, setOpenId] = useState<string | null>(GENERAL_FAQS[0].id);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+interface FaqItem {
+  question: string;
+  answer: string;
+  category: 'general' | 'booking' | 'consultants' | 'business';
+}
 
-  const categories = [
-    { id: 'all', label: 'All Questions' },
-    { id: 'general', label: 'General' },
-    { id: 'booking', label: 'Booking & Sessions' },
-    { id: 'consultants', label: 'For Consultants' },
-    { id: 'pricing', label: 'Pricing & Escrow' },
-    { id: 'execution', label: 'Execution Support' },
+export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
+  const [activeCategory, setActiveCategory] = useState<'all' | 'general' | 'booking' | 'consultants' | 'business'>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const faqs: FaqItem[] = [
+    {
+      category: 'general',
+      question: 'What is ConsultAPP and how does it work?',
+      answer:
+        'ConsultAPP is an expertise marketplace connecting individuals and organizations with verified Nigerian and African practitioners. You search by the problem you need solved, select a service package, book an open calendar slot, and meet 1-on-1 via secure video or phone.',
+    },
+    {
+      category: 'booking',
+      question: 'How does the Naira (₦) Escrow protection work?',
+      answer:
+        'When you book a consultation, your payment is held securely in escrow by ConsultAPP. The consultant is only paid after your session is completed. If the consultant fails to attend or cancels, you receive an immediate 100% refund.',
+    },
+    {
+      category: 'booking',
+      question: 'Can I reschedule or cancel my booked session?',
+      answer:
+        'Yes. You can reschedule your session to any other open slot on the consultant’s calendar with at least 24 hours notice at zero charge. Cancellations made 24+ hours before the scheduled time receive a full refund.',
+    },
+    {
+      category: 'general',
+      question: 'How are consultants verified on ConsultAPP?',
+      answer:
+        'Every consultant undergoes a rigorous manual vetting process. Our review desk verifies their identity, audits past client track records and case studies, checks references, and verifies their business or professional standing before granting verified status.',
+    },
+    {
+      category: 'consultants',
+      question: 'How do I become a verified consultant on ConsultAPP?',
+      answer:
+        'Click "Become a Consultant" and submit your application with your LinkedIn profile, domain expertise, and typical client outcomes. Our onboarding desk will review your submission and reach out within 48 business hours.',
+    },
+    {
+      category: 'consultants',
+      question: 'What are the platform fees for consultants?',
+      answer:
+        'Listing your profile is completely free. ConsultAPP retains a 15% platform commission on completed bookings to cover secure payment processing, video room infrastructure, client escrow safeguards, and marketing.',
+    },
+    {
+      category: 'business',
+      question: 'Can my company hire consultants for ongoing execution sprints?',
+      answer:
+        'Yes. In addition to 1-on-1 advisory calls, ConsultAPP supports milestone-backed execution contracts for organizations needing fractional CMOs, brand redesigns, supply chain audits, or market expansion roadmaps.',
+    },
+    {
+      category: 'business',
+      question: 'Do you offer corporate invoicing and vendor onboarding?',
+      answer:
+        'Yes. For corporate clients requiring customized Master Service Agreements (MSAs), VAT-compliant invoices, and consolidated billing across multiple departments, contact our Enterprise desk directly.',
+    },
   ];
 
-  const filteredFaqs = GENERAL_FAQS.filter((faq) => {
-    if (selectedCategory !== 'all' && faq.category !== selectedCategory) {
+  const filteredFaqs = faqs.filter((faq) => {
+    if (activeCategory !== 'all' && faq.category !== activeCategory) {
       return false;
     }
     if (searchQuery.trim()) {
@@ -35,128 +82,127 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
     return true;
   });
 
-  const toggleAccordion = (id: string) => {
-    setOpenId(openId === id ? null : id);
+  const toggleAccordion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <div id="faq-page" className="min-h-screen pt-24 pb-20 bg-[#FCFCFA]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center pt-8 pb-12 space-y-4">
-          <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#EFF6FF] text-[#2563EB] border border-[#BFDBFE]">
-            Knowledge Base
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#172B4D] tracking-tight">
-            Frequently Asked Questions
-          </h1>
-          <p className="text-base text-[#64748B] max-w-xl mx-auto">
-            Everything you need to know about booking consultations, escrow protection, and becoming
-            an expert on ConsultAPP.
-          </p>
+    <div id="faq-page" className="min-h-screen pt-24 pb-20 bg-[#F8F4F0] text-[#282329]">
+      {/* Hero Section */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-12">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F1E5EA] border border-[#E6DDE2] text-xs font-semibold text-[#49283F] mb-4">
+          <HelpCircle className="w-3.5 h-3.5" />
+          <span>Knowledge Base & Support</span>
         </div>
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-[#282329] tracking-tight leading-tight">
+          Frequently Asked Questions
+        </h1>
+        <p className="mt-4 text-base sm:text-lg text-[#716873] max-w-xl mx-auto leading-relaxed">
+          Find answers about finding experts, booking sessions, Naira escrow protection, and consultant applications.
+        </p>
 
-        {/* Search Bar */}
-        <div className="relative mb-8">
-          <div className="relative bg-white rounded-2xl border border-[#E5E7EB] shadow-xs hover:border-[#2563EB]/40 transition-all flex items-center p-2">
-            <Search className="w-5 h-5 text-[#2563EB] ml-3 shrink-0" />
+        {/* Search Filter */}
+        <div className="max-w-xl mx-auto mt-8">
+          <div className="relative">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#49283F]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search frequently asked questions..."
-              className="w-full px-3 py-2 text-sm bg-transparent border-none focus:outline-none placeholder:text-[#94A3B8]"
+              placeholder="Search questions (e.g. 'escrow', 'rescheduling', 'fees')..."
+              className="w-full pl-10 pr-4 py-3 rounded-2xl border border-[#E6DDE2] bg-white text-sm text-[#282329] placeholder:text-[#716873]/60 focus:border-[#49283F] focus:ring-2 focus:ring-[#49283F]/20 outline-none shadow-xs"
             />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="text-xs text-[#64748B] px-2 hover:text-[#17202A]"
-              >
-                Clear
-              </button>
-            )}
           </div>
         </div>
 
-        {/* Category Filter Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
-          {categories.map((cat) => (
+        {/* Category Tabs */}
+        <div className="flex items-center justify-center gap-1.5 mt-6 flex-wrap">
+          {[
+            { id: 'all', label: 'All Questions' },
+            { id: 'general', label: 'General' },
+            { id: 'booking', label: 'Booking & Escrow' },
+            { id: 'consultants', label: 'For Consultants' },
+            { id: 'business', label: 'Corporate & Teams' },
+          ].map((cat) => (
             <button
               key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                selectedCategory === cat.id
-                  ? 'bg-[#172B4D] text-white shadow-xs'
-                  : 'bg-white text-[#64748B] border border-[#E5E7EB] hover:border-slate-300'
+              onClick={() => setActiveCategory(cat.id as any)}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+                activeCategory === cat.id
+                  ? 'bg-[#49283F] text-white shadow-2xs'
+                  : 'bg-white text-[#716873] hover:text-[#282329] border border-[#E6DDE2]'
               }`}
             >
               {cat.label}
             </button>
           ))}
         </div>
+      </section>
 
-        {/* Accordions */}
+      {/* Accordion List */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div className="space-y-3">
-          {filteredFaqs.map((faq) => {
-            const isOpen = openId === faq.id;
-            return (
-              <div
-                key={faq.id}
-                className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden transition-all duration-200 shadow-2xs"
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleAccordion(faq.id)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-[#FCFCFA] transition-colors focus:outline-none cursor-pointer"
+          {filteredFaqs.length > 0 ? (
+            filteredFaqs.map((faq, idx) => {
+              const isOpen = openIndex === idx;
+              return (
+                <div
+                  key={idx}
+                  className="bg-white rounded-2xl border border-[#E6DDE2] shadow-2xs overflow-hidden transition-all"
                 >
-                  <span className="font-bold text-base text-[#17202A]">{faq.question}</span>
-                  <div
-                    className={`w-8 h-8 rounded-full bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 bg-[#172B4D] text-white' : ''
-                    }`}
+                  <button
+                    onClick={() => toggleAccordion(idx)}
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
+                    aria-expanded={isOpen}
                   >
-                    <ChevronDown className="w-4 h-4" />
-                  </div>
-                </button>
-
-                {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-sm sm:text-base text-[#475569] leading-relaxed border-t border-[#F1F5F9] bg-[#FCFCFA]/50 animate-fade-in">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-
-          {filteredFaqs.length === 0 && (
-            <div className="p-12 text-center bg-white rounded-2xl border border-[#E5E7EB]">
-              <HelpCircle className="w-8 h-8 text-[#94A3B8] mx-auto mb-2" />
-              <p className="text-sm font-semibold text-[#17202A]">No questions found</p>
-              <p className="text-xs text-[#64748B] mt-1">
-                Try searching for another keyword or check all categories.
-              </p>
+                    <span className="font-bold text-sm sm:text-base text-[#282329]">
+                      {faq.question}
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-[#49283F] shrink-0 transition-transform duration-200 ${
+                        isOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#716873] leading-relaxed border-t border-[#E6DDE2]/60 animate-fade-in">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <div className="bg-white rounded-2xl p-8 text-center border border-[#E6DDE2] space-y-2">
+              <p className="text-sm text-[#716873]">No questions found matching "{searchQuery}".</p>
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setActiveCategory('all');
+                }}
+                className="text-xs font-semibold text-[#49283F] hover:underline"
+              >
+                Clear search filter
+              </button>
             </div>
           )}
         </div>
 
-        {/* Still have questions? */}
-        <div className="mt-14 bg-[#EFF6FF] rounded-3xl p-8 border border-[#BFDBFE] text-center space-y-3">
-          <MessageSquare className="w-6 h-6 text-[#2563EB] mx-auto" />
-          <h3 className="text-lg font-bold text-[#172B4D]">Still have questions?</h3>
-          <p className="text-xs sm:text-sm text-[#64748B] max-w-sm mx-auto">
-            Our support team and consultant success desk are ready to help with any inquiries.
+        {/* Still Have Questions Box */}
+        <div className="mt-12 p-8 rounded-3xl bg-[#FAF7F4] border border-[#E6DDE2] text-center space-y-3">
+          <h3 className="font-bold text-lg text-[#282329]">Still have a specific question?</h3>
+          <p className="text-xs sm:text-sm text-[#716873] max-w-md mx-auto">
+            Our support and consultant verification teams are here to help you get the clarity you need.
           </p>
-          <div className="pt-2">
-            <button
-              onClick={() => onNavigate('contact')}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 text-xs font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-xs transition-colors cursor-pointer"
-            >
-              <span>Contact Support Desk</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
+          <button
+            onClick={() => onNavigate('contact')}
+            className="px-5 py-2.5 rounded-xl font-semibold text-white bg-[#49283F] hover:bg-[#3E2135] transition-colors text-xs inline-flex items-center gap-1.5 cursor-pointer"
+          >
+            <span>Contact Support Desk</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

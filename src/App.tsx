@@ -24,6 +24,7 @@ import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { TermsPage } from './pages/TermsPage';
 import { PrivacyPage } from './pages/PrivacyPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
@@ -69,7 +70,7 @@ export default function App() {
     currentPage === 'reset-password';
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FCFCFA] text-[#17202A] font-sans antialiased selection:bg-[#2563EB] selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#F8F4F0] text-[#282329] font-sans antialiased selection:bg-[#49283F] selection:text-white">
       {/* Toast Notification Container */}
       <Toast toasts={toasts} onDismiss={dismissToast} />
 
@@ -188,6 +189,10 @@ export default function App() {
 
         {currentPage === 'privacy' && (
           <PrivacyPage onNavigate={handleNavigate} />
+        )}
+
+        {currentPage === 'not-found' && (
+          <NotFoundPage onNavigate={handleNavigate} />
         )}
       </main>
 

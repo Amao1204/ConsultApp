@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { PageId, Consultant, CategoryId } from '../types';
 import { CATEGORIES, CONSULTANTS } from '../data/mockData';
 import { ConsultantCard } from '../components/ConsultantCard';
-import { Search, Filter, SlidersHorizontal, RotateCcw, ShieldCheck, Check } from 'lucide-react';
+import { Search, Filter, SlidersHorizontal, RotateCcw, ShieldCheck, Check, X, ArrowUpDown } from 'lucide-react';
 
 interface ExplorePageProps {
   initialCategory?: CategoryId;
@@ -72,161 +72,253 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
     setSortBy('rating');
   };
 
+  const hasActiveFilters =
+    selectedCategory !== 'all' ||
+    searchQuery.trim() !== '' ||
+    priceFilter !== 'all' ||
+    ratingFilter !== 'all' ||
+    availabilityFilter !== 'all';
+
   return (
-    <div id="explore-consultants-page" className="min-h-screen pt-24 pb-20 bg-[#FCFCFA]">
+    <div id="explore-consultants-page" className="min-h-screen pt-24 pb-20 bg-[#F8F4F0] text-[#282329]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Page Header */}
         <div className="text-center max-w-2xl mx-auto pt-6 pb-10 space-y-3">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#172B4D] tracking-tight">
-            Find someone who can help.
+          <span className="text-xs font-bold uppercase tracking-wider text-[#49283F]">
+            Marketplace Directory
+          </span>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#282329] tracking-tight">
+            Find the verified expert you need
           </h1>
-          <p className="text-sm sm:text-base text-[#64748B]">
-            Browse verified Nigerian professionals with real-world experience in business, branding,
-            fashion, career, events and more.
+          <p className="text-sm sm:text-base text-[#716873]">
+            Filter verified Nigerian and African practitioners by expertise, pricing, client ratings, and live calendar availability.
           </p>
         </div>
 
-        {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-8">
-          <div className="relative bg-white rounded-2xl border border-[#E5E7EB] shadow-xs hover:border-[#2563EB]/50 transition-all flex items-center p-2">
-            <Search className="w-5 h-5 text-[#2563EB] ml-3 shrink-0" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by topic, specialty or name (e.g., brand launch, fashion, resume, cash flow)..."
-              className="w-full px-3 py-2 text-sm bg-transparent border-none focus:outline-none placeholder:text-[#94A3B8]"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="text-xs text-[#64748B] hover:text-[#17202A] px-2"
-              >
-                Clear
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Category Horizontal Scroll Chips */}
-        <div className="flex items-center space-x-2 overflow-x-auto pb-4 mb-6 scrollbar-none">
-          <button
-            onClick={() => setSelectedCategory('all')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-              selectedCategory === 'all'
-                ? 'bg-[#172B4D] text-white shadow-xs'
-                : 'bg-white text-[#475569] border border-[#E5E7EB] hover:border-slate-300'
-            }`}
-          >
-            All Categories
-          </button>
-          {CATEGORIES.map((cat) => {
-            const isActive = selectedCategory === cat.id;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
-                  isActive
-                    ? 'bg-[#2563EB] text-white shadow-xs'
-                    : 'bg-white text-[#475569] border border-[#E5E7EB] hover:border-slate-300'
-                }`}
-              >
-                <span>{cat.name}</span>
-                <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                    isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-[#64748B]'
-                  }`}
-                >
-                  {cat.count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Filter & Sort Controls */}
-        <div className="bg-white rounded-2xl p-4 border border-[#E5E7EB] mb-8 shadow-xs">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-            {/* Desktop Filters */}
-            <div className="flex flex-wrap items-center gap-3 text-xs">
-              <span className="font-bold text-[#17202A] flex items-center gap-1">
-                <Filter className="w-3.5 h-3.5 text-[#2563EB]" />
-                <span>Filters:</span>
-              </span>
-
-              {/* Price Filter */}
-              <select
-                value={priceFilter}
-                onChange={(e) => setPriceFilter(e.target.value as any)}
-                className="px-3 py-1.5 bg-[#FCFCFA] border border-[#E5E7EB] rounded-lg text-[#17202A] focus:outline-none focus:ring-1 focus:ring-[#2563EB]"
-              >
-                <option value="all">Price: Any</option>
-                <option value="under25">Under ₦25,000</option>
-                <option value="25to40">₦25,000 – ₦40,000</option>
-                <option value="above40">Above ₦40,000</option>
-              </select>
-
-              {/* Rating Filter */}
-              <select
-                value={ratingFilter}
-                onChange={(e) => setRatingFilter(e.target.value as any)}
-                className="px-3 py-1.5 bg-[#FCFCFA] border border-[#E5E7EB] rounded-lg text-[#17202A] focus:outline-none focus:ring-1 focus:ring-[#2563EB]"
-              >
-                <option value="all">Rating: Any</option>
-                <option value="4.8">4.8+ Stars</option>
-                <option value="4.9">4.9+ Stars</option>
-              </select>
-
-              {/* Availability Filter */}
-              <button
-                onClick={() =>
-                  setAvailabilityFilter(availabilityFilter === 'today' ? 'all' : 'today')
-                }
-                className={`px-3 py-1.5 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
-                  availabilityFilter === 'today'
-                    ? 'bg-emerald-50 border-emerald-300 text-emerald-800 font-semibold'
-                    : 'bg-[#FCFCFA] border-[#E5E7EB] text-[#475569]'
-                }`}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span>Available Today</span>
-              </button>
-
-              {(priceFilter !== 'all' ||
-                ratingFilter !== 'all' ||
-                availabilityFilter !== 'all' ||
-                searchQuery ||
-                selectedCategory !== 'all') && (
+        {/* Search Bar & Primary Discovery Bar */}
+        <div className="bg-white rounded-2xl p-3 sm:p-4 border border-[#E6DDE2] shadow-xs mb-8">
+          <div className="flex flex-col md:flex-row gap-3">
+            {/* Search Input */}
+            <div className="relative flex-1">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#49283F]" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by name, expertise, or problem (e.g. 'fashion supply chain', 'brand identity')..."
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDE2] bg-[#FAF7F4] text-sm text-[#282329] placeholder:text-[#716873]/60 focus:bg-white focus:border-[#49283F] focus:ring-2 focus:ring-[#49283F]/20 outline-none"
+              />
+              {searchQuery && (
                 <button
-                  onClick={handleReset}
-                  className="px-2 py-1 text-[#64748B] hover:text-[#17202A] flex items-center gap-1 cursor-pointer"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-[#716873] hover:text-[#282329] cursor-pointer"
                 >
-                  <RotateCcw className="w-3 h-3" />
-                  <span>Reset</span>
+                  <X className="w-4 h-4" />
                 </button>
               )}
             </div>
 
             {/* Sort Dropdown */}
-            <div className="flex items-center gap-2 text-xs w-full lg:w-auto justify-between lg:justify-end">
-              <span className="text-[#64748B]">Showing {filteredConsultants.length} experts</span>
-              <div className="flex items-center gap-1.5">
-                <span className="text-[#64748B]">Sort:</span>
+            <div className="flex items-center gap-2">
+              <div className="relative min-w-[170px]">
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="px-3 py-1.5 bg-[#FCFCFA] border border-[#E5E7EB] rounded-lg text-[#17202A] focus:outline-none focus:ring-1 focus:ring-[#2563EB] font-medium"
+                  className="w-full appearance-none px-3.5 py-2.5 rounded-xl border border-[#E6DDE2] bg-white text-xs sm:text-sm font-medium text-[#282329] focus:border-[#49283F] outline-none cursor-pointer pr-8"
                 >
                   <option value="rating">Highest Rated</option>
-                  <option value="reviews">Most Reviews</option>
+                  <option value="reviews">Most Reviewed</option>
                   <option value="price-asc">Price: Low to High</option>
                   <option value="price-desc">Price: High to Low</option>
                 </select>
+                <ArrowUpDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#716873] pointer-events-none" />
               </div>
+
+              {/* Mobile Filter Toggle */}
+              <button
+                onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
+                className="md:hidden px-3.5 py-2.5 rounded-xl border border-[#E6DDE2] bg-[#FAF7F4] text-xs font-semibold text-[#49283F] flex items-center gap-1.5 cursor-pointer"
+              >
+                <SlidersHorizontal className="w-4 h-4" />
+                <span>Filters</span>
+              </button>
             </div>
           </div>
+
+          {/* Category Chips Bar (Segmented button controls) */}
+          <div className="mt-4 pt-3 border-t border-[#E6DDE2] flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+            <button
+              onClick={() => setSelectedCategory('all')}
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors shrink-0 cursor-pointer ${
+                selectedCategory === 'all'
+                  ? 'bg-[#49283F] text-white shadow-2xs'
+                  : 'bg-[#FAF7F4] text-[#716873] hover:text-[#282329] hover:bg-[#F1E5EA]'
+              }`}
+            >
+              All Categories ({CONSULTANTS.length})
+            </button>
+            {CATEGORIES.map((cat) => {
+              const isSelected = selectedCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors shrink-0 cursor-pointer ${
+                    isSelected
+                      ? 'bg-[#49283F] text-white shadow-2xs font-semibold'
+                      : 'bg-[#FAF7F4] text-[#716873] hover:text-[#282329] hover:bg-[#F1E5EA]'
+                  }`}
+                >
+                  {cat.name}
+                </button>
+              );
+            })}
+          </div>
         </div>
+
+        {/* Secondary Filter Bar (Price, Rating, Same-Day) on Desktop */}
+        <div className="hidden md:flex items-center justify-between pb-6 text-xs text-[#716873]">
+          <div className="flex items-center gap-4 flex-wrap">
+            {/* Price Filter */}
+            <div className="flex items-center gap-1.5">
+              <span className="font-semibold text-[#282329]">Price:</span>
+              <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-[#E6DDE2]">
+                {[
+                  { id: 'all', label: 'Any' },
+                  { id: 'under25', label: '< ₦25k' },
+                  { id: '25to40', label: '₦25k - ₦40k' },
+                  { id: 'above40', label: '> ₦40k' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setPriceFilter(item.id as any)}
+                    className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
+                      priceFilter === item.id
+                        ? 'bg-[#49283F] text-white font-semibold'
+                        : 'text-[#716873] hover:text-[#282329]'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Rating Filter */}
+            <div className="flex items-center gap-1.5">
+              <span className="font-semibold text-[#282329]">Rating:</span>
+              <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-[#E6DDE2]">
+                {[
+                  { id: 'all', label: 'All' },
+                  { id: '4.8', label: '4.8+ ★' },
+                  { id: '4.9', label: '4.9+ ★' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setRatingFilter(item.id as any)}
+                    className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
+                      ratingFilter === item.id
+                        ? 'bg-[#49283F] text-white font-semibold'
+                        : 'text-[#716873] hover:text-[#282329]'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Availability */}
+            <button
+              onClick={() => setAvailabilityFilter(availabilityFilter === 'today' ? 'all' : 'today')}
+              className={`px-3 py-1.5 rounded-lg border transition-colors cursor-pointer flex items-center gap-1.5 ${
+                availabilityFilter === 'today'
+                  ? 'bg-[#F1E5EA] border-[#49283F] text-[#49283F] font-semibold'
+                  : 'bg-white border-[#E6DDE2] text-[#716873] hover:border-[#D9B9C7]'
+              }`}
+            >
+              <span className="w-2 h-2 rounded-full bg-[#166534]" />
+              <span>Available Today</span>
+            </button>
+
+            {/* Reset Filters */}
+            {hasActiveFilters && (
+              <button
+                onClick={handleReset}
+                className="text-xs text-[#716873] hover:text-[#991B1B] flex items-center gap-1 cursor-pointer transition-colors"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Reset Filters</span>
+              </button>
+            )}
+          </div>
+
+          <div className="font-medium text-[#282329]">
+            Showing <strong>{filteredConsultants.length}</strong> verified expert{filteredConsultants.length === 1 ? '' : 's'}
+          </div>
+        </div>
+
+        {/* Mobile Filters Drawer */}
+        {mobileFilterOpen && (
+          <div className="md:hidden bg-white p-4 rounded-2xl border border-[#E6DDE2] shadow-sm mb-6 space-y-4 animate-fade-in">
+            <div className="flex items-center justify-between pb-2 border-b border-[#E6DDE2]">
+              <span className="font-bold text-sm text-[#282329]">Refine Consultants</span>
+              <button
+                onClick={() => setMobileFilterOpen(false)}
+                className="text-xs text-[#716873]"
+              >
+                Close
+              </button>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-[#282329] mb-1.5">Price Range</label>
+              <div className="grid grid-cols-2 gap-1.5">
+                {[
+                  { id: 'all', label: 'Any' },
+                  { id: 'under25', label: '< ₦25,000' },
+                  { id: '25to40', label: '₦25,000 - ₦40,000' },
+                  { id: 'above40', label: '> ₦40,000' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setPriceFilter(item.id as any)}
+                    className={`p-2 text-xs rounded-lg border text-center ${
+                      priceFilter === item.id
+                        ? 'border-[#49283F] bg-[#F1E5EA] text-[#49283F] font-bold'
+                        : 'border-[#E6DDE2] text-[#716873]'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-[#282329] mb-1.5">Availability</label>
+              <button
+                onClick={() => setAvailabilityFilter(availabilityFilter === 'today' ? 'all' : 'today')}
+                className={`w-full p-2 text-xs rounded-lg border text-center ${
+                  availabilityFilter === 'today'
+                    ? 'border-[#49283F] bg-[#F1E5EA] text-[#49283F] font-bold'
+                    : 'border-[#E6DDE2] text-[#716873]'
+                }`}
+              >
+                Show Only Available Today
+              </button>
+            </div>
+
+            {hasActiveFilters && (
+              <button
+                onClick={handleReset}
+                className="w-full py-2 text-xs text-[#991B1B] font-semibold text-center border border-[#FECACA] rounded-lg bg-[#FEE2E2]/40"
+              >
+                Reset All Filters
+              </button>
+            )}
+          </div>
+        )}
 
         {/* Results Grid */}
         {filteredConsultants.length > 0 ? (
@@ -236,26 +328,25 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                 key={consultant.id}
                 consultant={consultant}
                 onViewProfile={onViewConsultant}
+                onBookNow={onViewConsultant}
               />
             ))}
           </div>
         ) : (
           /* Empty State */
-          <div className="bg-white rounded-3xl p-12 text-center border border-[#E5E7EB] max-w-lg mx-auto space-y-4">
-            <div className="w-12 h-12 rounded-full bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center mx-auto">
-              <Search className="w-6 h-6" />
+          <div className="bg-white rounded-3xl p-12 text-center max-w-lg mx-auto border border-[#E6DDE2] space-y-4 my-8">
+            <div className="w-16 h-16 rounded-full bg-[#F1E5EA] flex items-center justify-center mx-auto text-[#49283F]">
+              <Search className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-bold text-[#17202A]">No consultants found</h3>
-            <p className="text-sm text-[#64748B]">
-              We couldn't find any consultants matching your current search or filters. Try adjusting
-              your criteria.
+            <h3 className="text-xl font-bold text-[#282329]">No consultants found</h3>
+            <p className="text-sm text-[#716873] leading-relaxed">
+              We couldn't find an expert matching your exact search filters. Try clearing your filters or searching with broader keywords.
             </p>
             <button
               onClick={handleReset}
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-xs transition-colors cursor-pointer"
+              className="px-5 py-2.5 rounded-xl font-semibold text-white bg-[#49283F] hover:bg-[#3E2135] transition-colors cursor-pointer text-sm"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Reset All Filters</span>
+              Reset Filters & Show All Experts
             </button>
           </div>
         )}

@@ -1,14 +1,13 @@
 import React from 'react';
 import { PageId } from '../types';
 import {
-  Sparkles,
-  CheckCircle2,
-  Clock,
   ShieldCheck,
+  CheckCircle2,
+  Lock,
+  Clock,
+  Sparkles,
   ArrowRight,
   HelpCircle,
-  CreditCard,
-  Lock,
 } from 'lucide-react';
 
 interface PricingPageProps {
@@ -20,225 +19,191 @@ export const PricingPage: React.FC<PricingPageProps> = ({
   onNavigate,
   onOpenBecomeModal,
 }) => {
+  const tiers = [
+    {
+      name: 'Quick Advice Session',
+      duration: '45 Minutes Live Call',
+      idealFor: 'Sanity checks, immediate roadblocks & quick feedback',
+      typicalPrice: '₦20,000 – ₦35,000',
+      isPopular: false,
+      deliverables: [
+        'Live 1-on-1 video or audio consultation',
+        'Direct answers to your prepared questions',
+        'Screen sharing & live asset review',
+        'Written summary notes with key takeaways',
+        '24 hours follow-up window for quick questions',
+      ],
+      ctaText: 'Explore Quick Advice Experts',
+    },
+    {
+      name: 'Strategic Deep Dive',
+      duration: '90 Minutes + Pre-diagnostic',
+      idealFor: 'Full audits, architecture & comprehensive roadmaps',
+      typicalPrice: '₦50,000 – ₦90,000',
+      isPopular: true,
+      deliverables: [
+        'Pre-call diagnostic questionnaire & review',
+        '90-minute structured whiteboarding & deep session',
+        'Competitor & positioning audit framework',
+        'Comprehensive written action deck with roadmap',
+        '7 days of async follow-up via ConsultAPP messaging',
+      ],
+      ctaText: 'Book a Deep Dive',
+    },
+    {
+      name: 'Execution Sprint',
+      duration: '2 to 4 Weeks Retainer',
+      idealFor: 'Hands-on project delivery, brand rollouts & leadership',
+      typicalPrice: '₦200,000 – ₦600,000+',
+      isPopular: false,
+      deliverables: [
+        'Structured milestone-based project contract',
+        'Weekly alignment steering calls with deliverables',
+        'Supervision of agency briefs, designs, or campaigns',
+        'Direct WhatsApp / ConsultAPP communication channel',
+        'Payment released in escrow upon milestone acceptance',
+      ],
+      ctaText: 'Inquire About Sprints',
+    },
+  ];
+
   return (
-    <div id="pricing-page" className="min-h-screen pt-24 pb-20 bg-[#FCFCFA]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto pt-8 pb-14 space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-xs font-semibold text-[#2563EB]">
-            <CreditCard className="w-3.5 h-3.5" />
-            <span>Transparent, Fair Marketplace Pricing</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#172B4D] tracking-tight">
-            Expert help for different kinds of problems.
-          </h1>
-          <p className="text-base sm:text-lg text-[#64748B] max-w-2xl mx-auto leading-relaxed">
-            Consultants on ConsultAPP set their own rates based on their specialization and the
-            depth of support you require. Every session has a clear flat price in Nigerian Naira (₦)
-            with zero surprise bills.
-          </p>
+    <div id="pricing-page" className="min-h-screen pt-24 pb-20 bg-[#F8F4F0] text-[#282329]">
+      {/* Hero Section */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-16">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F1E5EA] border border-[#E6DDE2] text-xs font-semibold text-[#49283F] mb-4">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Transparent Pricing Architecture</span>
         </div>
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-[#282329] tracking-tight leading-tight">
+          Clear, upfront rates in Nigerian Naira (₦).
+        </h1>
+        <p className="mt-4 text-base sm:text-lg text-[#716873] max-w-2xl mx-auto leading-relaxed">
+          No hidden fees, no opaque agency markups. Each consultant publishes their exact rates upfront with standardized deliverables and 100% escrow protection.
+        </p>
+      </section>
 
-        {/* Disclaimer Banner */}
-        <div className="max-w-3xl mx-auto mb-12 p-4 rounded-2xl bg-[#EFF6FF] border border-[#BFDBFE] flex items-center gap-3 text-xs sm:text-sm text-[#1E40AF]">
-          <HelpCircle className="w-5 h-5 shrink-0 text-[#2563EB]" />
-          <span>
-            <strong>Please note:</strong> The tiers below represent typical benchmark ranges. Exact
-            session fees are determined independently by each consultant and displayed clearly on their
-            public profile.
-          </span>
-        </div>
-
-        {/* 3 Benchmark Tier Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
-          {/* Tier 1: QUICK ADVICE */}
-          <div className="bg-white rounded-3xl p-8 border border-[#E5E7EB] hover:border-[#2563EB]/40 shadow-xs flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#2563EB] bg-[#EFF6FF] px-2.5 py-1 rounded-md inline-block mb-2">
-                  Fast Decisions
-                </span>
-                <h3 className="text-2xl font-bold text-[#17202A]">Quick Advice</h3>
-                <p className="text-xs sm:text-sm text-[#64748B] mt-1">
-                  Focused questions, sanity checks, and high-impact micro decisions.
-                </p>
-              </div>
-
-              <div className="pt-2">
-                <span className="text-xs text-[#64748B] block">Starting from</span>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl sm:text-4xl font-extrabold text-[#17202A]">₦10,000</span>
-                  <span className="text-xs text-[#64748B]">/ session</span>
-                </div>
-              </div>
-
-              <div className="space-y-2.5 pt-4 border-t border-[#F1F5F9] text-xs sm:text-sm text-[#475569]">
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
-                  <span>30 – 45 minute live video consultation</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
-                  <span>Single specific dilemma or document review</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
-                  <span>Immediate verbal recommendations</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
-                  <span>Session summary takeaway points</span>
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={() => onNavigate('explore')}
-              className="w-full py-2.5 text-xs font-semibold text-[#172B4D] hover:text-[#2563EB] bg-[#FCFCFA] hover:bg-slate-50 border border-[#E5E7EB] rounded-xl transition-colors cursor-pointer"
+      {/* Advisory Service Tiers Grid */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+          {tiers.map((tier, idx) => (
+            <div
+              key={idx}
+              className={`rounded-3xl p-8 border flex flex-col justify-between transition-all relative ${
+                tier.isPopular
+                  ? 'bg-white border-[#49283F] shadow-md ring-1 ring-[#49283F]'
+                  : 'bg-white border-[#E6DDE2] shadow-2xs hover:border-[#D9B9C7]'
+              }`}
             >
-              Browse Quick Advice Experts
-            </button>
-          </div>
+              {tier.isPopular && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#49283F] text-white text-xs font-semibold shadow-xs">
+                  Most Popular for Strategy
+                </div>
+              )}
 
-          {/* Tier 2: DEEP DIVE (Featured) */}
-          <div className="bg-[#172B4D] text-white rounded-3xl p-8 border-2 border-[#2563EB] shadow-md flex flex-col justify-between space-y-6 relative">
-            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#2563EB] text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-              Most Popular
-            </div>
-
-            <div className="space-y-4">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#93C5FD] bg-[#243B61] px-2.5 py-1 rounded-md inline-block mb-2">
-                  Comprehensive Strategy
-                </span>
-                <h3 className="text-2xl font-bold text-white">Deep Dive</h3>
-                <p className="text-xs sm:text-sm text-[#CBD5E1] mt-1">
-                  Complex problems requiring thorough diagnostic evaluation and roadmap planning.
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold text-[#282329]">{tier.name}</h3>
+                  <div className="text-xs text-[#716873] flex items-center gap-1.5 font-medium">
+                    <Clock className="w-3.5 h-3.5 text-[#49283F]" />
+                    <span>{tier.duration}</span>
+                  </div>
+                </div>
+
+                <div className="my-6 pt-4 border-t border-[#E6DDE2]">
+                  <span className="text-[11px] font-semibold text-[#716873] uppercase tracking-wider block">
+                    Typical Investment Range
+                  </span>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-[#282329] mt-0.5">
+                    {tier.typicalPrice}
+                  </div>
+                  <span className="text-[11px] text-[#716873] block mt-0.5">
+                    *Consultants set specific rates individually
+                  </span>
+                </div>
+
+                <p className="text-xs text-[#716873] leading-relaxed mb-6">
+                  {tier.idealFor}
                 </p>
+
+                <div className="space-y-3 pt-4 border-t border-[#E6DDE2]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#282329] block">
+                    Included Deliverables:
+                  </span>
+                  <ul className="space-y-2 text-xs text-[#282329]">
+                    {tier.deliverables.map((item, dIdx) => (
+                      <li key={dIdx} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#49283F] shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
-              <div className="pt-2">
-                <span className="text-xs text-[#93C5FD] block">Starting from</span>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl sm:text-4xl font-extrabold text-white">₦30,000</span>
-                  <span className="text-xs text-[#CBD5E1]">/ session</span>
-                </div>
-              </div>
-
-              <div className="space-y-2.5 pt-4 border-t border-[#243B61] text-xs sm:text-sm text-[#E2E8F0]">
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#60A5FA] shrink-0 mt-0.5" />
-                  <span>60 – 90 minute in-depth whiteboard session</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#60A5FA] shrink-0 mt-0.5" />
-                  <span>Pre-call review of your metrics, deck, or pitch</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#60A5FA] shrink-0 mt-0.5" />
-                  <span>Detailed written action blueprint delivered</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#60A5FA] shrink-0 mt-0.5" />
-                  <span>7 days asynchronous Q&A messaging follow-up</span>
-                </div>
+              <div className="pt-8">
+                <button
+                  onClick={() => onNavigate('explore')}
+                  className={`w-full py-3 rounded-xl font-semibold text-sm transition-colors cursor-pointer flex items-center justify-center gap-2 ${
+                    tier.isPopular
+                      ? 'bg-[#49283F] hover:bg-[#3E2135] text-white shadow-xs'
+                      : 'bg-white hover:bg-[#F1E5EA] text-[#49283F] border border-[#E6DDE2]'
+                  }`}
+                >
+                  <span>{tier.ctaText}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
 
-            <button
-              onClick={() => onNavigate('explore')}
-              className="w-full py-2.5 text-xs font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-xs transition-colors cursor-pointer"
-            >
-              Browse Deep Dive Experts
-            </button>
+      {/* Escrow Guarantee & Transparency Section */}
+      <section className="bg-[#FAF7F4] py-16 border-y border-[#E6DDE2]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div className="text-center max-w-xl mx-auto space-y-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#49283F]">
+              Platform Transparency
+            </span>
+            <h2 className="text-2xl font-bold text-[#282329]">
+              How payment and fees work
+            </h2>
           </div>
 
-          {/* Tier 3: ONGOING SUPPORT */}
-          <div className="bg-white rounded-3xl p-8 border border-[#E5E7EB] hover:border-[#2563EB]/40 shadow-xs flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#2563EB] bg-[#EFF6FF] px-2.5 py-1 rounded-md inline-block mb-2">
-                  Hands-On Execution
-                </span>
-                <h3 className="text-2xl font-bold text-[#17202A]">Ongoing Support</h3>
-                <p className="text-xs sm:text-sm text-[#64748B] mt-1">
-                  Recurring advisory, milestone sprints, or direct hands-on implementation.
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white p-6 rounded-2xl border border-[#E6DDE2] space-y-2.5">
+              <div className="w-10 h-10 rounded-xl bg-[#F1E5EA] flex items-center justify-center text-[#49283F]">
+                <Lock className="w-5 h-5" />
               </div>
-
-              <div className="pt-2">
-                <span className="text-xs text-[#64748B] block">Scope</span>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl sm:text-4xl font-extrabold text-[#17202A]">Custom</span>
-                  <span className="text-xs text-[#64748B]">/ milestone</span>
-                </div>
-              </div>
-
-              <div className="space-y-2.5 pt-4 border-t border-[#F1F5F9] text-xs sm:text-sm text-[#475569]">
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
-                  <span>Multi-week execution sprints (e.g., 2–4 weeks)</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
-                  <span>Hands-on deliverable creation & agency oversight</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
-                  <span>Protected escrow milestone payment releases</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
-                  <span>Weekly checkpoint calls with the expert</span>
-                </div>
-              </div>
+              <h4 className="font-bold text-base text-[#282329]">Naira Escrow Holding</h4>
+              <p className="text-xs sm:text-sm text-[#716873] leading-relaxed">
+                When you book, payment is charged and held securely by ConsultAPP. It is only disbursed to the consultant after the session has successfully taken place.
+              </p>
             </div>
 
-            <button
-              onClick={() => onNavigate('for-businesses')}
-              className="w-full py-2.5 text-xs font-semibold text-[#172B4D] hover:text-[#2563EB] bg-[#FCFCFA] hover:bg-slate-50 border border-[#E5E7EB] rounded-xl transition-colors cursor-pointer"
-            >
-              Learn About Business Sprints
-            </button>
-          </div>
-        </div>
+            <div className="bg-white p-6 rounded-2xl border border-[#E6DDE2] space-y-2.5">
+              <div className="w-10 h-10 rounded-xl bg-[#F1E5EA] flex items-center justify-center text-[#49283F]">
+                <Clock className="w-5 h-5" />
+              </div>
+              <h4 className="font-bold text-base text-[#282329]">24h Free Rescheduling</h4>
+              <p className="text-xs sm:text-sm text-[#716873] leading-relaxed">
+                Need to reschedule? Shift your consultation to another open slot on the consultant's calendar with at least 24 hours notice at zero penalty.
+              </p>
+            </div>
 
-        {/* Payment Security Highlights */}
-        <div className="max-w-4xl mx-auto bg-white rounded-2xl p-6 sm:p-8 border border-[#E5E7EB] grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-          <div className="space-y-1">
-            <Lock className="w-6 h-6 text-[#2563EB] mx-auto" />
-            <h4 className="font-bold text-sm text-[#17202A]">Protected in Escrow</h4>
-            <p className="text-xs text-[#64748B]">
-              Funds are only disbursed to the consultant after the session has occurred.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <ShieldCheck className="w-6 h-6 text-emerald-600 mx-auto" />
-            <h4 className="font-bold text-sm text-[#17202A]">No-Show Refund</h4>
-            <p className="text-xs text-[#64748B]">
-              If a consultant cannot make a call, reschedule or claim 100% refund immediately.
-            </p>
-          </div>
-          <div className="space-y-1">
-            <Clock className="w-6 h-6 text-[#F59E0B] mx-auto" />
-            <h4 className="font-bold text-sm text-[#17202A]">Flexible Rescheduling</h4>
-            <p className="text-xs text-[#64748B]">
-              Cancel or move your slot up to 12 hours before without penalty.
-            </p>
+            <div className="bg-white p-6 rounded-2xl border border-[#E6DDE2] space-y-2.5">
+              <div className="w-10 h-10 rounded-xl bg-[#F1E5EA] flex items-center justify-center text-[#49283F]">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h4 className="font-bold text-base text-[#282329]">Transparent 15% Platform Fee</h4>
+              <p className="text-xs sm:text-sm text-[#716873] leading-relaxed">
+                Clients pay the exact published price. ConsultAPP retains a simple 15% fee from the consultant payout to support KYC, escrow, video hosting, and dispute resolution.
+              </p>
+            </div>
           </div>
         </div>
-
-        {/* Big CTA */}
-        <div className="text-center pt-14">
-          <button
-            onClick={() => onNavigate('explore')}
-            className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-xs transition-colors cursor-pointer"
-          >
-            <span>Browse All Consultants & Live Rates</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };
